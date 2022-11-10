@@ -4,6 +4,9 @@
  */
 package proyecto2V2;
 
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DropTarget;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -32,7 +35,7 @@ public class Partida implements Serializable{
     ArrayList<Zombie> zombies;
     JLabel matriz[][];
     
-    
+   
     
     
     public Partida(int lvl){
@@ -126,7 +129,7 @@ public class Partida implements Serializable{
                 field.setLocation(i*50, j*50);
                 //field.setb;
                 field.setTransferHandler(new TransferHandler("text"));
-                MouseListener listener = new Partida.DragMouseAdapt(field);
+                MouseListener listener = new Partida.DragMouseAdapt();
                 field.addMouseListener(listener);
                 field.setBorder(border);
                 panel.add(field);
@@ -139,18 +142,16 @@ public class Partida implements Serializable{
    
 
    private class DragMouseAdapt extends MouseAdapter {
-        JLabel label;
-        public DragMouseAdapt(JLabel label){
-            this.label = label;
-        }
-        
+
+
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
-            TransferHandler handler = c.getTransferHandler();
-            handler.exportAsDrag(c, e, TransferHandler.COPY);   
-            //handler.getDragImage();
+            JLabel l = (JLabel)c;
+            l.setText("");
+            
         }
-    }
+
+   }
     public void ubicarZombies(){
         System.out.println("Aqui comienza a ubicar zombies");
         for(Zombie z: this.zombies){
