@@ -46,6 +46,7 @@ public class GUIJuego extends javax.swing.JFrame {
     private BDUsuario bd;
     private JLabel label;
     private JLabel field;
+    private JLabel matriz[][];
     /**
      * Creates new form GUIJuego
      */
@@ -54,7 +55,14 @@ public class GUIJuego extends javax.swing.JFrame {
         this.partida = p;
         this.bd = bd;
         generateTextFields();
-        generateSlots();
+        
+        if(this.partida.getMatriz() ==null){
+            this.matriz = this.partida.generateSlots(this.panelMapa);
+            
+        }else{
+            this.matriz = this.partida.getMatriz();
+        }
+        //generateSlots();
         //crearReliquia();
     }
 
@@ -79,23 +87,7 @@ public class GUIJuego extends javax.swing.JFrame {
        }        
     }
     
-    private void generateSlots(){
-        Border border = LineBorder.createGrayLineBorder();
-        for (int i = 0; i < panelMapa.getWidth()-50; i+=50){
-            for (int j = 0; j < panelMapa.getHeight()-50; j+=50){
-                field= new JLabel();
-                field.setSize(50, 50);
-                field.setLocation(i, j);
-                //field.setb;
-                field.setTransferHandler(new TransferHandler("text"));
-                MouseListener listener = new DragMouseAdapt(field);
-                field.addMouseListener(listener);
-                field.setBorder(border);
-                panelMapa.add(field);
-               // field.pare
-            }
-        }
-    }     
+         
         
     private class DragMouseAdapter extends MouseAdapter {
         public void mousePressed(MouseEvent e) {

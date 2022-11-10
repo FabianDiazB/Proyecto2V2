@@ -4,11 +4,20 @@
  */
 package proyecto2V2;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.TransferHandler;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -21,6 +30,8 @@ public class Partida implements Serializable{
     ArrayList<Bicho> bichos;
     ArrayList<Arma> armas;
     ArrayList<Zombie> zombies;
+    JLabel matriz[][];
+    
     
     
     
@@ -103,9 +114,42 @@ public class Partida implements Serializable{
             System.out.println("Fichero bichos no encontrado");
         }
         ubicarZombies();
-
     }
-    
+    public JLabel[][] generateSlots(JPanel panel){
+        matriz =  new JLabel[23][12];
+        Border border = LineBorder.createGrayLineBorder();
+        for (int i = 0; i < 23; i++){
+            for (int j = 0; j < 12;j++){
+                JLabel field= new JLabel();
+                field.setSize(50, 50);
+                field.setLocation(i*50, j*50);
+                //field.setb;
+                field.setTransferHandler(new TransferHandler("text"));
+                MouseListener listener = new Partida.DragMouseAdapt(field);
+                field.addMouseListener(listener);
+                field.setBorder(border);
+                panel.add(field);
+                
+               // field.pare
+            }
+        }
+        return matriz;
+    }
+   
+
+   private class DragMouseAdapt extends MouseAdapter {
+        JLabel label;
+        public DragMouseAdapt(JLabel label){
+            this.label = label;
+        }
+        
+        public void mousePressed(MouseEvent e) {
+            JComponent c = (JComponent) e.getSource();
+            TransferHandler handler = c.getTransferHandler();
+            handler.exportAsDrag(c, e, TransferHandler.COPY);   
+            //handler.getDragImage();
+        }
+    }
     public void ubicarZombies(){
         System.out.println("Aqui comienza a ubicar zombies");
         for(Zombie z: this.zombies){
@@ -136,6 +180,10 @@ public class Partida implements Serializable{
 
     public ArrayList<Zombie> getZombies() {
         return zombies;
+    }
+
+    public JLabel[][] getMatriz() {
+        return matriz;
     }
     
     
