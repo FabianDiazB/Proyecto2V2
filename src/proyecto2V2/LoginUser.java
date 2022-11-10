@@ -23,6 +23,7 @@ public class LoginUser extends javax.swing.JFrame {
         initComponents();
         usuarios = new BDUsuario();
         usuarios.restaurar();
+        mostrarUsuarios();
         
 
     }
@@ -46,6 +47,11 @@ public class LoginUser extends javax.swing.JFrame {
           pantalla.setVisible(true);
      }
     
+     public void mostrarUsuarios(){
+         for(Usuario u: usuarios.getUsers()){
+             System.out.println(u.toString());
+         }
+     }
     
     //cosas del GUIIIIIIIIIIIIIIIIIIIIIIIIII
     /**
