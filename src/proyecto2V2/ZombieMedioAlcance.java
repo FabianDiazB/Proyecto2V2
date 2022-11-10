@@ -25,4 +25,10 @@ public class ZombieMedioAlcance extends Zombie{
     public void mover() {
 
     }
+
+  
+    @Override
+    public boolean detectar(Arma defensa) { 
+        return false;
+    }
 }

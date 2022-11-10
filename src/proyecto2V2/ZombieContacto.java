@@ -18,12 +18,18 @@ public class ZombieContacto extends Zombie{
 
     @Override
     public void atacar() {
-        
     }
 
     @Override
     public void mover() {
 
+    }
+
+    @Override
+    public boolean detectar(Arma defensa) {
+        int xD = defensa.getX();
+        int yD = defensa.getY();
+        return false;
     }
 }
     

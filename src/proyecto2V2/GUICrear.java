@@ -27,6 +27,7 @@ public class GUICrear extends javax.swing.JFrame {
     public GUICrear() throws IOException, ClassNotFoundException {
         initComponents(); 
         this.restaurar();
+        toStringBichos();
     }
     
     public void validarCampos() throws IOException, FileNotFoundException, ClassNotFoundException{
@@ -72,12 +73,23 @@ public class GUICrear extends javax.swing.JFrame {
         }
         
         bdBichos.addBicho(new Bicho(nombre,tipoAtaque,skin,imgAtaque,tipo,vida,aparicion,ataque,espacio));
+        JOptionPane.showMessageDialog(this,"Nuevo Personaje Agregado","ALLOW",JOptionPane.DEFAULT_OPTION);
+
         
-        
+    }
+    
+    public void toStringBichos(){
+        System.out.println("Bichos actuales");
+        for(Bicho b: this.bdBichos.getBichos()){
+            System.out.println(b.toString());
+        }
     }
     
     public void finConfig() throws IOException, FileNotFoundException, ClassNotFoundException{
        guardar();
+       JOptionPane.showMessageDialog(this,"Configuración finalizada","ERROR",JOptionPane.DEFAULT_OPTION);
+       this.dispose();
+
     }
 
     
