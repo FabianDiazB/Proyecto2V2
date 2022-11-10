@@ -45,7 +45,7 @@
               <Component id="panelBarra" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="panelMapa" alignment="0" max="32767" attributes="0"/>
+          <Component id="panelMapa" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -93,7 +93,7 @@
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="568" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTextField1" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="jTextField2" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
