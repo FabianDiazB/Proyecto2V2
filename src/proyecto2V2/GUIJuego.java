@@ -35,6 +35,7 @@ import javax.swing.TransferHandler;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import static javax.swing.text.DefaultEditorKit.cutAction;
 
 /**
  *
@@ -70,7 +71,7 @@ public class GUIJuego extends javax.swing.JFrame {
             panelBarra.add(txf);      
             label.setSize(50, 50);
             label.setLocation(60+(60*posX++), 15);
-            label.setTransferHandler(new TransferHandler("icon"));
+            label.setTransferHandler(new TransferHandler("text"));
             MouseListener listener = new DragMouseAdapter();
             label.addMouseListener(listener);
             label.setVerticalTextPosition(JLabel.BOTTOM);
@@ -80,17 +81,18 @@ public class GUIJuego extends javax.swing.JFrame {
     
     private void generateSlots(){
         Border border = LineBorder.createGrayLineBorder();
-        for (int i = 0; i < panelMapa.getWidth(); i+=50){
-            for (int j = 0; j < panelMapa.getHeight(); j+=50){
+        for (int i = 0; i < panelMapa.getWidth()-50; i+=50){
+            for (int j = 0; j < panelMapa.getHeight()-50; j+=50){
                 field= new JLabel();
                 field.setSize(50, 50);
                 field.setLocation(i, j);
                 //field.setb;
                 field.setTransferHandler(new TransferHandler("text"));
-                MouseListener listener = new DragMouseAdapt();
+                MouseListener listener = new DragMouseAdapt(field);
                 field.addMouseListener(listener);
                 field.setBorder(border);
                 panelMapa.add(field);
+               // field.pare
             }
         }
     }     
@@ -103,11 +105,16 @@ public class GUIJuego extends javax.swing.JFrame {
         }
     }
     private class DragMouseAdapt extends MouseAdapter {
+        JLabel label;
+        public DragMouseAdapt(JLabel label){
+            this.label = label;
+        }
+        
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
             TransferHandler handler = c.getTransferHandler();
-            handler.exportAsDrag(c, e, TransferHandler.COPY);     
-            handler.getDragImage();
+            handler.exportAsDrag(c, e, TransferHandler.COPY);   
+            //handler.getDragImage();
         }
     }
     private class DragListener implements DropTargetListener{
@@ -201,7 +208,7 @@ public class GUIJuego extends javax.swing.JFrame {
             .addGroup(panelMapaLayout.createSequentialGroup()
                 .addGap(486, 486, 486)
                 .addComponent(jLabel2)
-                .addContainerGap(520, Short.MAX_VALUE))
+                .addContainerGap(530, Short.MAX_VALUE))
         );
         panelMapaLayout.setVerticalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +306,8 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelMapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelMapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addComponent(panelBarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
