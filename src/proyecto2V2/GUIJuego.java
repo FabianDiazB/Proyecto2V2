@@ -58,14 +58,15 @@ public class GUIJuego extends javax.swing.JFrame {
            label = new JLabel(arma.getNombre());
            JTextField txf = new JTextField(arma.getNombre());
            panelBarra.add(txf);
-           //txf.setSize(70,);
-           //txf.setLocation(155+(75*posX++), 15);
+           txf.setSize(50,50);
+           txf.setLocation(155+(75*posX++), 15);
            label.setSize(50, 50);
            label.setLocation(155+(60*posX++), 15);
            label.setTransferHandler(new TransferHandler("icon"));
            MouseListener listener = new DragMouseAdapter();
            label.addMouseListener(listener);
            panelBarra.add(label);
+           panelMapa.add(txf);
        }
            
     }
