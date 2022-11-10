@@ -56,8 +56,8 @@ public class GUIJuego extends javax.swing.JFrame {
        int posX = 0;
        for (Arma arma : partida.armas){
            label = new JLabel(arma.getNombre());
-           //JTextField txf = new JTextField(arma.getNombre());
-           //panelBarra.add(txf);
+           JTextField txf = new JTextField(arma.getNombre());
+           panelBarra.add(txf);
            //txf.setSize(70,);
            //txf.setLocation(155+(75*posX++), 15);
            label.setSize(50, 50);
