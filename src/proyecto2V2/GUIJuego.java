@@ -339,7 +339,11 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMouseExited
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        try {
+            this.bd.guardar();
+        } catch (IOException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
