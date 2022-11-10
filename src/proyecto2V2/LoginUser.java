@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
  */
 public class LoginUser extends javax.swing.JFrame {
    private BDUsuario usuarios;
-   private int a;
-      private int b;
 
     
      public LoginUser() throws IOException, ClassNotFoundException {
