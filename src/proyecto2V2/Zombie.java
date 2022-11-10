@@ -31,6 +31,7 @@ public abstract class Zombie extends Thread implements Serializable{
         System.out.println("Creado");
     }
     
+    
     public abstract void atacar();
     public abstract void mover();
     

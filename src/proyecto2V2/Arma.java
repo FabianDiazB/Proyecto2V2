@@ -18,6 +18,7 @@ public abstract class Arma extends Thread implements Serializable {
     private String disparo;
     private int lvlAparicion;
     private int espacio;
+    private int x,y;
 
     public Arma(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -91,6 +92,11 @@ public abstract class Arma extends Thread implements Serializable {
     @Override
     public String toString() {
         return "Arma{" + "vida=" + vida + ", damage=" + damage + ", nombre=" + nombre + ", skin=" + skin + ", disparo=" + disparo + ", lvlAparicion=" + lvlAparicion + ", espacio=" + espacio + '}';
+    }
+    
+    public void setCoordenadas(int x, int y){
+        this.x = x;
+        this.y = y;
     }
     
     
