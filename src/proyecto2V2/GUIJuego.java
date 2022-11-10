@@ -60,7 +60,11 @@ public class GUIJuego extends javax.swing.JFrame {
             this.matriz = this.partida.generateSlots(this.panelMapa);
             
         }else{
+            this.matriz = new JLabel[22][13];
             this.matriz = this.partida.getMatriz();
+            System.out.println("si la cargó");
+            dibujar();
+            System.out.println("si la dibujo");
         }
         //generateSlots();
         //crearReliquia();
@@ -68,6 +72,14 @@ public class GUIJuego extends javax.swing.JFrame {
 
     private GUIJuego() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public void dibujar(){
+        for(int i=0;i<22;i++){
+            for(int j=0;j<13;j++){
+                panelMapa.add(this.matriz[i][j]);
+            }
+        }
     }
     
     private void generateTextFields(){

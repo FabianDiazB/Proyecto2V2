@@ -116,11 +116,12 @@ public class Partida implements Serializable{
         ubicarZombies();
     }
     public JLabel[][] generateSlots(JPanel panel){
-        matriz =  new JLabel[23][12];
+        matriz =  new JLabel[22][13];
         Border border = LineBorder.createGrayLineBorder();
-        for (int i = 0; i < 23; i++){
-            for (int j = 0; j < 12;j++){
-                JLabel field= new JLabel();
+        for (int i = 0; i < 22; i++){
+            for (int j = 0; j < 13;j++){
+                JLabel field = new JLabel();
+                
                 field.setSize(50, 50);
                 field.setLocation(i*50, j*50);
                 //field.setb;
@@ -129,7 +130,7 @@ public class Partida implements Serializable{
                 field.addMouseListener(listener);
                 field.setBorder(border);
                 panel.add(field);
-                
+                matriz[i][j] = field;
                // field.pare
             }
         }
