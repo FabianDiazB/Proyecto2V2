@@ -11,10 +11,21 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
+import javax.swing.JTextField;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.TransferHandler;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -23,6 +34,8 @@ import javax.swing.JTextField;
 public class GUIJuego extends javax.swing.JFrame {
     private Partida partida;
     private BDUsuario bd;
+    private JLabel label;
+    JTextField textField;
     /**
      * Creates new form GUIJuego
      */
@@ -30,6 +43,7 @@ public class GUIJuego extends javax.swing.JFrame {
         initComponents();
         this.partida = p;
         this.bd = bd;
+        generateTextFields();
         //crearReliquia();
     }
 
@@ -37,6 +51,31 @@ public class GUIJuego extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+        private void generateTextFields(){
+        
+       int posX = 0;
+       for (Arma arma : partida.armas){
+           label = new JLabel(arma.getNombre());
+           //JTextField txf = new JTextField(arma.getNombre());
+           //panelBarra.add(txf);
+           //txf.setSize(70,);
+           //txf.setLocation(155+(75*posX++), 15);
+           label.setSize(50, 50);
+           label.setLocation(155+(60*posX++), 15);
+           label.setTransferHandler(new TransferHandler("icon"));
+           MouseListener listener = new DragMouseAdapter();
+           label.addMouseListener(listener);
+           panelBarra.add(label);
+       }
+           
+    }
+    private class DragMouseAdapter extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
+            JComponent c = (JComponent) e.getSource();
+            TransferHandler handler = c.getTransferHandler();
+            handler.exportAsDrag(c, e, TransferHandler.COPY);
+    }
+  }
     
     public void crearReliquia(){
         
