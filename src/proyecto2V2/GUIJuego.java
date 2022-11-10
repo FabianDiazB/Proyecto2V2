@@ -74,6 +74,9 @@ public class GUIJuego extends javax.swing.JFrame {
                 field= new JLabel("field"+i+j);
                 field.setSize(50, 50);
                 field.setLocation(i, j);
+                field.setTransferHandler(new TransferHandler("text"));
+                MouseListener listener = new DragMouseAdapt();
+                field.addMouseListener(listener);
                 panelMapa.add(field);
             }
         }
@@ -84,6 +87,14 @@ public class GUIJuego extends javax.swing.JFrame {
             JComponent c = (JComponent) e.getSource();
             TransferHandler handler = c.getTransferHandler();
             handler.exportAsDrag(c, e, TransferHandler.COPY);
+        }
+    }
+    private class DragMouseAdapt extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
+            JComponent c = (JComponent) e.getSource();
+            TransferHandler handler = c.getTransferHandler();
+            handler.exportAsDrag(c, e, TransferHandler.COPY);
+            
         }
     }
     
