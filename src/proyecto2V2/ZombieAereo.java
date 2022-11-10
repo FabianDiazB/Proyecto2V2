@@ -27,10 +27,5 @@ public class ZombieAereo extends Zombie{
     public void mover() {
 
     }
-
-    @Override
-    public boolean detectar(Arma defensa) {
-        
-    }
 }
     

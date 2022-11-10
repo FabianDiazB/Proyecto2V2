@@ -31,7 +31,7 @@ public abstract class Zombie extends Thread implements Serializable{
         System.out.println("Creado");
     }
     
-    public abstract boolean detectar(Arma defensa);
+    
     public abstract void atacar();
     public abstract void mover();
     
@@ -126,7 +126,9 @@ public abstract class Zombie extends Thread implements Serializable{
     
     @Override
     public void run(){
-        
+        while(true){
+            System.out.println(this.toString());
+        }
     }
     
     
