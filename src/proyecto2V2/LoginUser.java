@@ -29,7 +29,6 @@ public class LoginUser extends javax.swing.JFrame {
     }
      
      public void iniciarJuego() throws IOException, ClassNotFoundException{
-         System.out.println("a");
           for( Usuario u : usuarios.getUsers()){
               if(txfUsuario.getText().equals(u.getNombre())){
                   GUIUsuario pantalla = new GUIUsuario(u,usuarios);
