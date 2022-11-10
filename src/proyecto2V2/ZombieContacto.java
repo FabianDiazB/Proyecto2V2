@@ -29,6 +29,22 @@ public class ZombieContacto extends Zombie{
     public boolean detectar(Arma defensa) {
         int xD = defensa.getX();
         int yD = defensa.getY();
+        
+        int xZ = this.getX();
+        int yZ = this.getY();
+        
+        if((xZ>=(xD - 15)) && (yZ>=yD - 15 && yZ<=yD+75) ){
+            return true;
+        }
+        if((xZ<= (xD +75)) && (yZ>=yD - 15 && yZ<=yD+75) ){
+            return true;
+        }
+        if((yZ<= (yD -75)) && (xZ>=xD - 75 && xZ<=xD) ){
+            return true;
+        }
+        if((yZ>= (yD +75)) && (xZ >= xD - 15  && xZ<=xD+75) ){
+            return true;
+        }
         return false;
     }
 }

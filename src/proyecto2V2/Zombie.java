@@ -18,7 +18,9 @@ public abstract class Zombie extends Thread implements Serializable{
     private String disparo;
     private int lvlAparicion;
     private int espacio;
-    private int x,y;
+    private int x;
+    private int y;
+    private boolean caminando;
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -26,6 +28,7 @@ public abstract class Zombie extends Thread implements Serializable{
         this.nombre = nombre;
         this.skin = skin;
         this.disparo = disparo;
+        this.caminando=false;
         this.lvlAparicion = lvlAparicion;
         this.espacio = espacio;
         System.out.println("Creado");
@@ -118,6 +121,32 @@ public abstract class Zombie extends Thread implements Serializable{
     public void setEspacio(int espacio) {
         this.espacio = espacio;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean isCaminando() {
+        return caminando;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setCaminando(boolean caminando) {
+        this.caminando = caminando;
+    }
+    
+    
 
     @Override
     public String toString() {

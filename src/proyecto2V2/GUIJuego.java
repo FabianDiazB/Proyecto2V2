@@ -138,7 +138,6 @@ public class GUIJuego extends javax.swing.JFrame {
 
         barraImagenes = new javax.swing.JTextField();
         panelMapa = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         panelBarra = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
@@ -164,24 +163,15 @@ public class GUIJuego extends javax.swing.JFrame {
         panelMapa.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         panelMapa.setForeground(new java.awt.Color(0, 102, 102));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reliquia.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-
         javax.swing.GroupLayout panelMapaLayout = new javax.swing.GroupLayout(panelMapa);
         panelMapa.setLayout(panelMapaLayout);
         panelMapaLayout.setHorizontalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMapaLayout.createSequentialGroup()
-                .addGap(486, 486, 486)
-                .addComponent(jLabel2)
-                .addContainerGap(530, Short.MAX_VALUE))
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
         panelMapaLayout.setVerticalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMapaLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 654, Short.MAX_VALUE)
         );
 
         panelBarra.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -390,7 +380,6 @@ public class GUIJuego extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
