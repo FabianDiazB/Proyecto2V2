@@ -15,7 +15,6 @@ public class ZombieMedioAlcance extends Zombie{
         super(vida, damage, name, skin, disparo, lvlAparicion, espacio);
     }
     
-    
 
     @Override
     public void atacar() {

@@ -18,6 +18,7 @@ public abstract class Zombie extends Thread implements Serializable{
     private String disparo;
     private int lvlAparicion;
     private int espacio;
+    private int x,y;
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -27,10 +28,39 @@ public abstract class Zombie extends Thread implements Serializable{
         this.disparo = disparo;
         this.lvlAparicion = lvlAparicion;
         this.espacio = espacio;
+        System.out.println("Creado");
     }
     
     public abstract void atacar();
     public abstract void mover();
+    
+    public void ubicar(){
+        System.out.println("entrando al ubicaaaaar");
+        int r = (int)(Math.random()*4+1);
+        
+        switch (r) {
+            case 1:
+                this.x = 10;
+                this.y = (int)(Math.random()*150+1);
+                break;
+            case 2:
+                this.x = 1080;
+                this.y = (int)(Math.random()*150+1);
+                break;
+             case 3:
+                this.x = (int)(Math.random()*1080+1);
+                this.y = 10;
+                break;
+             case 4:
+                this.x = (int)(Math.random()*1080+1);
+                this.y = 143;
+                break;
+                
+        }
+        System.out.println("Zombie:" +this.nombre + "en:");
+        System.out.println("("+this.x +","+this.y+")");
+        System.out.println("");
+    }
     
     public int getVida() {
         return vida;

@@ -178,7 +178,7 @@ public class GUICrear extends javax.swing.JFrame {
 
         lvlAttack.setText("Ataque");
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zombie", "Artillería", "Muralla" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zombie", "Artilleria", "Muralla" }));
         cmbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTipoActionPerformed(evt);

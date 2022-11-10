@@ -37,7 +37,7 @@ public class BDUsuario implements Serializable{
                 ArrayList<Usuario> bd = (ArrayList<Usuario>)leyendoFichero.readObject();
                 this.users = bd;
             }
-            System.out.println("Base de datos de usuarios cargada.....");
+            System.out.println("Base de datos de usuarios restaurada.....");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Fichero usuarios no encontrado");
         }

@@ -10,9 +10,11 @@ package proyecto2V2;
  */
 public class ZombieAereo extends Zombie{
 
-    public ZombieAereo(int vida, int damage,String name, String skin, String disparo, int lvlAparicion, int espacio) {
-        super(vida, damage, name, skin, disparo, lvlAparicion, espacio);
+    public ZombieAereo(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
+        super(vida, damage, nombre, skin, disparo, lvlAparicion, espacio);
     }
+
+    
     
     
 

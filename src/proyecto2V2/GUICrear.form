@@ -203,7 +203,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
             <StringItem index="0" value="Zombie"/>
-            <StringItem index="1" value="Artiller&#xed;a"/>
+            <StringItem index="1" value="Artilleria"/>
             <StringItem index="2" value="Muralla"/>
           </StringArray>
         </Property>

@@ -33,28 +33,29 @@ public class Partida implements Serializable{
             try (ObjectInputStream leyendoFichero = new ObjectInputStream( 
                     new FileInputStream("bichos.txt") )) {
                 ArrayList<Bicho> bd = (ArrayList<Bicho>)leyendoFichero.readObject();
-                for (Bicho bicho : bd)
-                if (bicho.getLvlAparicion()== this.nivel){
-                    if(bicho.getTipo().equals("Zombie")){
-                        switch(bicho.getTipoAtaque()){
-                            case "Aereo":
-                                ZombieAereo zombie = new ZombieAereo((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
-                                        bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                for (Bicho bicho : bd){
+                    System.out.println(bicho.getNombre() + " es de tipo "+bicho.getTipo());
+                    if (bicho.getLvlAparicion()<= this.nivel){
+                        if(bicho.getTipo().equals("Zombie")){
+                            System.out.println("Encontre un zombie");
+                            switch(bicho.getTipoAtaque()){
+                                case "Aereo":
+                                ZombieAereo zombie = new ZombieAereo((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 zombies.add(zombie);
                                 break;
-                            case "Medio alcance":
-                                ZombieMedioAlcance zombie1 = new ZombieMedioAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
-                                        bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                                
+                                case "Medio alcance":
+                                ZombieMedioAlcance zombie1 = new ZombieMedioAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 zombies.add(zombie1);
                                 break;
-                            case "Contacto":
-                                ZombieContacto zombie2 = new ZombieContacto((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
-                                        bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                                
+                                case "Contacto":
+                                ZombieContacto zombie2 = new ZombieContacto((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 zombies.add(zombie2);
                                 break;
-                            case "Largo alcance":
-                                ZombieLargoAlcance zombie3 = new ZombieLargoAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
-                                        bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                                
+                                case "Largo alcance":
+                                ZombieLargoAlcance zombie3 = new ZombieLargoAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 zombies.add(zombie3);
                                 break;
 
@@ -86,6 +87,7 @@ public class Partida implements Serializable{
                                 ArmaBloque arma4 = new ArmaBloque((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
                                     bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 armas.add(arma4);
+                            }
                         }
                     }
                 }
@@ -95,7 +97,15 @@ public class Partida implements Serializable{
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Fichero bichos no encontrado");
         }
-        toStringBichos();
+        ubicarZombies();
+
+    }
+    
+    public void ubicarZombies(){
+        System.out.println("Aqui comienza a ubicar zombies");
+        for(Zombie z: this.zombies){
+            z.ubicar();
+        }
     }
     
 
@@ -123,9 +133,6 @@ public class Partida implements Serializable{
         return zombies;
     }
     
-   public void toStringBichos(){
-       for(Bicho b:this.bichos ){
-           System.out.println(b.toString());
-       }
-   }
+    
+  
 }
