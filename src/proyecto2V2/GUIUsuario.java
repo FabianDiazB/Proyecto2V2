@@ -150,7 +150,6 @@ public class GUIUsuario extends javax.swing.JFrame {
             System.out.println("Nuevo juego creado");
             nuevoJ.setVisible(true);
             bd.guardar();
-            System.out.println("Base guardada nuevamente sebas guineo");
         } catch (IOException ex) {
             Logger.getLogger(GUIUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

@@ -95,6 +95,7 @@ public class Partida implements Serializable{
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Fichero bichos no encontrado");
         }
+        toStringBichos();
     }
     
 
@@ -122,5 +123,9 @@ public class Partida implements Serializable{
         return zombies;
     }
     
-   
+   public void toStringBichos(){
+       for(Bicho b:this.bichos ){
+           System.out.println(b.toString());
+       }
+   }
 }

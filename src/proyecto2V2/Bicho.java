@@ -68,6 +68,6 @@ public class Bicho implements Serializable{
         return espacio;
     }
     
-    
+  
     
 }

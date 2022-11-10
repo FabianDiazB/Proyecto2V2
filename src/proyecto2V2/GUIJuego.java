@@ -41,10 +41,16 @@ public class GUIJuego extends javax.swing.JFrame {
     public void crearReliquia(){
         
         javax.swing.JLabel reliquia = new javax.swing.JLabel();
-        reliquia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/config/reliquia.png"))); // NOI18N
+        try {
+            reliquia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reliquia.png"))); 
+            
+
+        } catch (Exception e) {
+            System.out.println("Imagen no encontrada");
+        }
+        reliquia.setSize(600, 600);
+        reliquia.setLocation(200, 200);
         panelMapa.add(reliquia);
-        reliquia.setSize(60, 60);
-        reliquia.setLocation(500, 500);
         
     }
     @SuppressWarnings("unchecked")
@@ -55,7 +61,7 @@ public class GUIJuego extends javax.swing.JFrame {
         panelMapa = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
-        lblReli = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         panelBarra = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -76,7 +82,8 @@ public class GUIJuego extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre");
 
-        lblReli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reliquia.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reliquia.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout panelMapaLayout = new javax.swing.GroupLayout(panelMapa);
         panelMapa.setLayout(panelMapaLayout);
@@ -90,8 +97,8 @@ public class GUIJuego extends javax.swing.JFrame {
                             .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(panelMapaLayout.createSequentialGroup()
-                        .addGap(508, 508, 508)
-                        .addComponent(lblReli)))
+                        .addGap(486, 486, 486)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMapaLayout.setVerticalGroup(
@@ -101,9 +108,9 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addGap(221, 221, 221)
-                .addComponent(lblReli, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel2)
+                .addContainerGap(484, Short.MAX_VALUE))
         );
 
         panelBarra.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -240,8 +247,8 @@ public class GUIJuego extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JLabel lblReli;
     private javax.swing.JPanel panelBarra;
     private javax.swing.JPanel panelMapa;
     // End of variables declaration//GEN-END:variables
