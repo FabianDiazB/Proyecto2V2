@@ -13,6 +13,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -25,6 +32,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.TransferHandler;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -60,23 +69,27 @@ public class GUIJuego extends javax.swing.JFrame {
             JTextField txf = new JTextField(arma.getNombre());
             panelBarra.add(txf);      
             label.setSize(50, 50);
-            label.setLocation(155+(60*posX++), 15);
+            label.setLocation(60+(60*posX++), 15);
             label.setTransferHandler(new TransferHandler("icon"));
             MouseListener listener = new DragMouseAdapter();
             label.addMouseListener(listener);
+            label.setVerticalTextPosition(JLabel.BOTTOM);
             panelBarra.add(label);
        }        
     }
     
     private void generateSlots(){
+        Border border = LineBorder.createGrayLineBorder();
         for (int i = 0; i < panelMapa.getWidth(); i+=50){
             for (int j = 0; j < panelMapa.getHeight(); j+=50){
-                field= new JLabel("field"+i+j);
+                field= new JLabel();
                 field.setSize(50, 50);
                 field.setLocation(i, j);
+                //field.setb;
                 field.setTransferHandler(new TransferHandler("text"));
                 MouseListener listener = new DragMouseAdapt();
                 field.addMouseListener(listener);
+                field.setBorder(border);
                 panelMapa.add(field);
             }
         }
@@ -93,10 +106,46 @@ public class GUIJuego extends javax.swing.JFrame {
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
             TransferHandler handler = c.getTransferHandler();
-            handler.exportAsDrag(c, e, TransferHandler.COPY);
-            
+            handler.exportAsDrag(c, e, TransferHandler.COPY);     
+            handler.getDragImage();
         }
     }
+    private class DragListener implements DropTargetListener{
+
+        @Override
+        public void dragEnter(DropTargetDragEvent dtde) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void dragOver(DropTargetDragEvent dtde) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void dropActionChanged(DropTargetDragEvent dtde) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void dragExit(DropTargetEvent dte) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void drop(DropTargetDropEvent dtde) {
+           dtde.acceptDrop(DnDConstants.ACTION_MOVE);
+           Transferable t = dtde.getTransferable();
+           DataFlavor[] df = t.getTransferDataFlavors();
+           for (DataFlavor f: df){
+               try{
+               }catch(Exception e){
+               
+               }
+           }
+        }
+    }
+    
     
     public void crearReliquia(){
         
