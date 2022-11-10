@@ -29,6 +29,6 @@ public class ZombieLargoAlcance extends Zombie{
 
     @Override
     public boolean detectar(Arma defensa) {
-        
+        return false;
     }
 }

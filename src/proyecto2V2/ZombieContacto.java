@@ -29,6 +29,7 @@ public class ZombieContacto extends Zombie{
     public boolean detectar(Arma defensa) {
         int xD = defensa.getX();
         int yD = defensa.getY();
+        return false;
     }
 }
     

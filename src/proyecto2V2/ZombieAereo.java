@@ -30,7 +30,7 @@ public class ZombieAereo extends Zombie{
 
     @Override
     public boolean detectar(Arma defensa) {
-        
+        return false;
     }
 }
     
