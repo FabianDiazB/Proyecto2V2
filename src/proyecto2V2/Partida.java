@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Partida implements Serializable{
     int nivel;
     String nombre;
-
+    int espacioDisponible;
     ArrayList<Bicho> bichos;
     ArrayList<Arma> armas;
     ArrayList<Zombie> zombies;
@@ -26,6 +26,11 @@ public class Partida implements Serializable{
     
     public Partida(int lvl){
         this.nivel = lvl; 
+        if(this.nivel==1){
+            this.espacioDisponible=15;
+        }else{
+            this.espacioDisponible= 10+(5*this.nivel);
+        }
         this.nombre = "Partida ";
         this.zombies = new ArrayList<Zombie>();
         this.armas = new ArrayList<Arma>();
