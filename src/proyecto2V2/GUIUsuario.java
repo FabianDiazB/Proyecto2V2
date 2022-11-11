@@ -151,6 +151,7 @@ public class GUIUsuario extends javax.swing.JFrame {
             System.out.println("Nuevo juego creado");
             nuevoJ.setVisible(true);
             bd.guardar();
+            System.out.println("base guardaaaaaaaaaaaaaaaaaaaaaaaa");
         } catch (IOException ex) {
             Logger.getLogger(GUIUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

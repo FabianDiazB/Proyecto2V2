@@ -34,12 +34,14 @@ public class Partida implements Serializable{
     ArrayList<Arma> armas=new ArrayList<Arma>();
     ArrayList<Zombie> zombies =new ArrayList<Zombie>();
     JLabel matriz[][];
+    Reliquia reliquia;
     
    
     
     
     public Partida(int lvl){
         this.nivel = lvl; 
+        this.reliquia = new Reliquia(20);
         if(this.nivel==1){
             this.espacioDisponible=15;
         }else{

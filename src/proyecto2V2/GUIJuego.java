@@ -57,7 +57,8 @@ public class GUIJuego extends javax.swing.JFrame {
         this.bd = bd;
         generateTextFields();
         if(this.partida.getMatriz() ==null){
-            this.matriz = this.partida.generateSlots(this.panelMapa);    
+            this.matriz = this.partida.generateSlots(this.panelMapa); 
+           
         }else{
             this.matriz = new JLabel[22][13];
             this.matriz = this.partida.getMatriz();
@@ -65,8 +66,7 @@ public class GUIJuego extends javax.swing.JFrame {
             dibujar();
             System.out.println("si la dibujo");
         }
-        //generateSlots();
-        //crearReliquia();
+        
     }
 
     private GUIJuego() {
@@ -82,7 +82,6 @@ public class GUIJuego extends javax.swing.JFrame {
     }
     
     private void generateTextFields(){
-        
         int posX = 0;
         for (Arma arma : partida.armas){
             label = new JLabel(arma.getNombre());
@@ -95,7 +94,8 @@ public class GUIJuego extends javax.swing.JFrame {
             label.addMouseListener(listener);
             label.setVerticalTextPosition(JLabel.BOTTOM);
             panelBarra.add(label);
-       }        
+       }  
+        
     }           
         
     private class DragMouseAdapter extends MouseAdapter {
