@@ -48,17 +48,28 @@ public class GUIJuego extends javax.swing.JFrame {
     private JLabel label;
     private JLabel field;
     private JLabel matriz[][];
+    private int reliq = 1;
     /**
      * Creates new form GUIJuego
      */
     public GUIJuego(Partida p, BDUsuario bd) throws IOException, ClassNotFoundException {
+        System.out.println("comenzando a crear");
         initComponents();
+        System.out.println("componentes creados");
         this.partida = p;
+        System.out.println("partida añadida");
         this.bd = bd;
-        generateTextFields();
+        System.out.println("base añadida");
+        
+       // generateTextFields();
         if(this.partida.getMatriz() ==null){
+            System.out.println(" matriz vacia");
             this.matriz = this.partida.generateSlots(this.panelMapa); 
-           
+            System.out.println("slots generados");
+            generateTextFields();
+            generateReli();
+            System.out.println("campos generados");
+            
         }else{
             this.matriz = new JLabel[22][13];
             this.matriz = this.partida.getMatriz();
@@ -79,19 +90,42 @@ public class GUIJuego extends javax.swing.JFrame {
                 panelMapa.add(this.matriz[i][j]);
             }
         }
+        threadMundano();
     }
-    
+    public void threadMundano(){
+        while(true){
+            
+        }
+    }
+    private void generateReli(){
+        JLabel reli = new JLabel("Reliquia");
+        reli.setSize(50, 50);
+        reli.setLocation(50, 15);
+        reli.setTransferHandler(new TransferHandler("text"));
+        MouseListener listener = new DragMouseAdapter();
+        reli.addMouseListener(listener);
+        reli.setVerticalTextPosition(JLabel.BOTTOM);
+        panelBarra.add(reli);
+        
+        }
     private void generateTextFields(){
         int posX = 0;
+        JLabel reli = new JLabel("Reliquia");
+        reli.setSize(50, 50);
+        reli.setLocation(50+(60*posX++), 15);
+        reli.setTransferHandler(new TransferHandler("text"));
+        MouseListener listener = new DragMouseAdapter();
+        reli.addMouseListener(listener);
+        reli.setVerticalTextPosition(JLabel.BOTTOM);
+        panelBarra.add(reli);
+        
         for (Arma arma : partida.armas){
-            label = new JLabel(arma.getNombre());
-            JTextField txf = new JTextField(arma.getNombre());
-            panelBarra.add(txf);      
+            label = new JLabel(arma.getNombre());     
             label.setSize(50, 50);
-            label.setLocation(60+(60*posX++), 15);
+            label.setLocation(150+(60*posX++), 15);
             label.setTransferHandler(new TransferHandler("text"));
-            MouseListener listener = new DragMouseAdapter();
-            label.addMouseListener(listener);
+            MouseListener listener1 = new DragMouseAdapter();
+            label.addMouseListener(listener1);
             label.setVerticalTextPosition(JLabel.BOTTOM);
             panelBarra.add(label);
        }  
@@ -103,7 +137,7 @@ public class GUIJuego extends javax.swing.JFrame {
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
             TransferHandler handler = c.getTransferHandler();
-            handler.exportAsDrag(c, e, TransferHandler.COPY);
+            handler.exportAsDrag(c, e, TransferHandler.MOVE);
         }
     }
     private class Borrar extends MouseAdapter {

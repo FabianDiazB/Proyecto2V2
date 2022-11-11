@@ -48,8 +48,7 @@ public abstract class Zombie extends Thread implements Serializable{
         if(detectado!=null){
             this.caminando=false;
             atacar();
-            return;
-        }
+        }else{
 
         if (this.x < reliquia.getX()) 
             this.x++;
@@ -57,6 +56,7 @@ public abstract class Zombie extends Thread implements Serializable{
         if (this.y < reliquia.getY())
             this.y++;
         else this.y++;
+        }
  
     }
     

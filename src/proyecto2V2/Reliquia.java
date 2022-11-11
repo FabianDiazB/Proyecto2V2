@@ -13,8 +13,10 @@ import java.io.Serializable;
 public class Reliquia implements Serializable {
     private int vida,x,y;
 
+
     public Reliquia(int vida) {
         this.vida = vida;
+
     }
     
     public int getVida() {
