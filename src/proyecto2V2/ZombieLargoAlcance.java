@@ -4,6 +4,8 @@
  */
 package proyecto2V2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
@@ -28,7 +30,28 @@ public class ZombieLargoAlcance extends Zombie{
     }
 
     @Override
-    public boolean detectar(Arma defensa) {
+    public boolean detectar(ArrayList<Arma> enemigos) {
+        for(Arma defensa: enemigos){
+            int xD = defensa.getX();
+            int yD = defensa.getY();
+        
+            int xZ = this.getX();
+            int yZ = this.getY();
+        
+            if((xZ>=(xD - 150)) && (yZ>=yD - 200 && yZ<=yD+200) ){
+                return true;
+            }
+            if((xZ<= (xD +200)) && (yZ>=yD - 200 && yZ<=yD+200) ){
+                return true;
+            }
+            if((yZ<= (yD -200)) && (xZ>=xD - 200 && xZ<=xD) ){
+                return true;
+            }
+            if((yZ>= (yD +200)) && (xZ >= xD - 200  && xZ<=xD+200) ){
+                return true;
+            }
+
+        }
         return false;
     }
 }

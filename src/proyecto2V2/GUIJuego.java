@@ -147,6 +147,7 @@ public class GUIJuego extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         lblnivel = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        btnPrueba = new javax.swing.JButton();
 
         barraImagenes.setBackground(new java.awt.Color(204, 204, 204));
         barraImagenes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -229,6 +230,13 @@ public class GUIJuego extends javax.swing.JFrame {
             }
         });
 
+        btnPrueba.setText("prueba");
+        btnPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPruebaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -252,6 +260,10 @@ public class GUIJuego extends javax.swing.JFrame {
                                         .addComponent(lblnivel)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnPrueba)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +278,9 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblnivel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+                .addGap(110, 110, 110)
+                .addComponent(btnPrueba)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,6 +354,10 @@ public class GUIJuego extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+        //pruebazombi();
+    }//GEN-LAST:event_btnPruebaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -378,6 +396,7 @@ public class GUIJuego extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField barraImagenes;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnPrueba;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

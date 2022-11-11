@@ -5,6 +5,7 @@
 package proyecto2V2;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -34,7 +35,7 @@ public abstract class Zombie extends Thread implements Serializable{
         System.out.println("Creado");
     }
     
-    public abstract boolean detectar(Arma defensa);
+    public abstract boolean detectar(ArrayList<Arma> enemigos);
     public abstract void atacar();
     public abstract void mover();
     

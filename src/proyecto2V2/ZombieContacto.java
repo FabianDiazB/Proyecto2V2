@@ -4,6 +4,8 @@
  */
 package proyecto2V2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
@@ -25,27 +27,33 @@ public class ZombieContacto extends Zombie{
 
     }
 
+  
     @Override
-    public boolean detectar(Arma defensa) {
-        int xD = defensa.getX();
-        int yD = defensa.getY();
+    public boolean detectar(ArrayList<Arma> enemigos) {
+        for(Arma defensa: enemigos){
+            int xD = defensa.getX();
+            int yD = defensa.getY();
         
-        int xZ = this.getX();
-        int yZ = this.getY();
+            int xZ = this.getX();
+            int yZ = this.getY();
         
-        if((xZ>=(xD - 15)) && (yZ>=yD - 15 && yZ<=yD+75) ){
-            return true;
-        }
-        if((xZ<= (xD +75)) && (yZ>=yD - 15 && yZ<=yD+75) ){
-            return true;
-        }
-        if((yZ<= (yD -75)) && (xZ>=xD - 75 && xZ<=xD) ){
-            return true;
-        }
-        if((yZ>= (yD +75)) && (xZ >= xD - 15  && xZ<=xD+75) ){
-            return true;
+            if((xZ>=(xD - 50)) && (yZ>=yD - 100 && yZ<=yD+100) ){
+                return true;
+            }
+            if((xZ<= (xD +100)) && (yZ>=yD - 100 && yZ<=yD+100) ){
+                return true;
+            }
+            if((yZ<= (yD -100)) && (xZ>=xD - 100 && xZ<=xD) ){
+                return true;
+            }
+            if((yZ>= (yD +100)) && (xZ >= xD - 100  && xZ<=xD+100) ){
+                return true;
+            }
+
         }
         return false;
     }
+
+    
 }
     

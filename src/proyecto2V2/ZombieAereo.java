@@ -4,6 +4,8 @@
  */
 package proyecto2V2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
@@ -28,8 +30,30 @@ public class ZombieAereo extends Zombie{
 
     }
 
-    @Override
-    public boolean detectar(Arma defensa) {
+    
+   @Override
+    public boolean detectar(ArrayList<Arma> enemigos) {
+        for(Arma defensa: enemigos){
+            int xD = defensa.getX();
+            int yD = defensa.getY();
+        
+            int xZ = this.getX();
+            int yZ = this.getY();
+        
+            if((xZ>=(xD - 50)) && (yZ>=yD - 100 && yZ<=yD+100) ){
+                return true;
+            }
+            if((xZ<= (xD +100)) && (yZ>=yD - 100 && yZ<=yD+100) ){
+                return true;
+            }
+            if((yZ<= (yD -100)) && (xZ>=xD - 100 && xZ<=xD) ){
+                return true;
+            }
+            if((yZ>= (yD +100)) && (xZ >= xD - 100  && xZ<=xD+100) ){
+                return true;
+            }
+
+        }
         return false;
     }
 }
