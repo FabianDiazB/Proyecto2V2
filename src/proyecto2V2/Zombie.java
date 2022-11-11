@@ -26,7 +26,7 @@ public abstract class Zombie extends Thread implements Serializable{
     private int y;
     private boolean caminando;
     private Reliquia reliquia;
-    private ArrayList<Arma> armas;
+    private ArrayList<Arma> armas = new ArrayList<Arma>();
     private JLabel labelZ;
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
@@ -41,24 +41,23 @@ public abstract class Zombie extends Thread implements Serializable{
         System.out.println("Creado");
     }
     
-    public abstract Arma detectar(ArrayList<Arma> enemigos);
+    public abstract Arma detectar(ArrayList<Arma> armas);
     public abstract void atacar();
+    
     public void mover() throws InterruptedException{
         System.out.println("moviendo");
-        sleep(1000);
         Arma detectado = detectar(armas);
-        
+        sleep(10);
         if(detectado!=null){
             this.caminando=false;
-            atacar();
+            //atacar();
         }else{
-
         if (this.x < reliquia.getX()) 
             this.x++;
         else this.x--;
         if (this.y < reliquia.getY())
             this.y++;
-        else this.y++;
+        else this.y--;
         }
         this.labelZ.setLocation(x, y);
     }
@@ -70,27 +69,37 @@ public abstract class Zombie extends Thread implements Serializable{
     public void setLabelZ(JLabel labelZ) {
         this.labelZ = labelZ;
     }
+
+    public Reliquia getReliquia() {
+        return reliquia;
+    }
+
+    public ArrayList<Arma> getArmas() {
+        return armas;
+    }
+    
+    
     
     public void ubicar(){
         System.out.println("entrando al ubicaaaaar");
         int r = (int)(Math.random()*4+1);
-        
+        System.out.println(r);//int n = (int) (Math.random() * (1049 - 949)) + 949;
         switch (r) {
             case 1:
-                this.x = 10;
-                this.y = (int)(Math.random()*150+1);
+                this.x = 50;
+                this.y = (int)(Math.random()*(656-606)+606);
                 break;
             case 2:
-                this.x = 1080;
-                this.y = (int)(Math.random()*150+1);
+                this.x = 1050;
+                this.y = (int)(Math.random()*606+1);
                 break;
              case 3:
-                this.x = (int)(Math.random()*1080+1);
-                this.y = 10;
+                this.x = (int)(Math.random()*1049+1);
+                this.y = 50;
                 break;
              case 4:
-                this.x = (int)(Math.random()*1080+1);
-                this.y = 143;
+                this.x = (int)(Math.random()*1049+1);
+                this.y = 606;
                 break;
                 
         }
@@ -196,10 +205,13 @@ public abstract class Zombie extends Thread implements Serializable{
     
     @Override
     public void run(){
-        boolean ejecutando=true;
+        ArmaBloque nueva =new ArmaBloque(20, 0, "Reliquia", "skin", "sin", 1, 0);
+        nueva.setCoordenadas(reliquia.getX(), reliquia.getY());
+        armas.add(nueva);
         
+        boolean ejecutando=true;
         while(ejecutando){
-            System.out.println("imprimiendo hilo");
+            //System.out.println("("+this.x+","+this.y+")");
             if(this.vida>0){
                 if(this.caminando==true){
                     try {
@@ -207,6 +219,9 @@ public abstract class Zombie extends Thread implements Serializable{
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Zombie.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }else{
+                    ejecutando = false;
+                    //atacar aqui
                 }
             }
             else {ejecutando=false;

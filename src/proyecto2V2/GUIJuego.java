@@ -108,7 +108,7 @@ public class GUIJuego extends javax.swing.JFrame {
         reli.addMouseListener(listener);
         reli.setVerticalTextPosition(JLabel.BOTTOM);
         panelBarra.add(reli);
-        partida.reliquia.setReliquia(reli);
+        this.partida.reliquia.setReliquia(reli);
         
         }
     private void generateTextFields(){
@@ -164,14 +164,14 @@ public class GUIJuego extends javax.swing.JFrame {
         System.out.println("creando zombie prueba");
         ZombieAereo z = new ZombieAereo(3, 3, "PRUEBA", "a", "b", 1, 3);
         z.ubicar();
+        z.setReliquia(this.partida.getReliquia());
         JLabel nuevo = new JLabel(z.getNombre());
         nuevo.setSize(50,50);
         nuevo.setLocation(z.getX(), z.getY());
-        nuevo.setBounds(z.getX(), z.getY(), 50, 50);
-        nuevo.add(panelMapa);
-        
-//        z.setLabelZ(nuevo);
-//        z.start();
+        panelMapa.add(nuevo);
+        revalidate();
+        z.setLabelZ(nuevo);
+        z.start();
     }
     public void crearReliquia(){
         
@@ -187,6 +187,20 @@ public class GUIJuego extends javax.swing.JFrame {
         reliquia.setLocation(200, 200);
         panelMapa.add(reliquia);
         
+    }
+    
+    public void guardarCoordenadas(){
+        for (int i = 0; i<22; i++){
+            for (int j = 0; j<13; j++){
+                if(matriz[i][j].getText().equals("Reliquia")){
+                    System.out.println(matriz[i][j].getX());
+                    System.out.println(matriz[i][j].getY());
+                    partida.reliquia.setX(matriz[i][j].getX());
+                    partida.reliquia.setY(matriz[i][j].getY());
+                    return;
+                }
+            }
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -387,6 +401,7 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMouseExited
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        guardarCoordenadas();
         try {
             this.bd.guardar();
             JOptionPane.showMessageDialog(this, "Partida guardada","SAVE",JOptionPane.DEFAULT_OPTION);
@@ -402,6 +417,7 @@ public class GUIJuego extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
+        guardarCoordenadas();
         try {
             this.bd.guardar();
             this.dispose();
@@ -412,6 +428,8 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+        System.out.println("\n\n\n boton prueba accionado ");
+        guardarCoordenadas();
         pruebazombi();
     }//GEN-LAST:event_btnPruebaActionPerformed
 

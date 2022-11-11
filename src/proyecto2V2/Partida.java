@@ -111,13 +111,7 @@ public class Partida implements Serializable{
                     }
                 }
             this.bichos = bd;
-            for (Zombie z : zombies){
-                z.setArmas(armas);
-                z.setReliquia(this.reliquia);
-            }
-            for (Arma a : armas){
-                a.setZombies(zombies);
-            }
+            asignarReliquia();
             }
             System.out.println("Base de datos de usuarios cargada.....");
         } catch (IOException | ClassNotFoundException e) {
@@ -141,10 +135,19 @@ public class Partida implements Serializable{
                 field.setBorder(border);
                 panel.add(field);
                 matriz[i][j] = field;
-               // field.pare
+               // field.pare+
             }
         }
         return matriz;
+    }
+    public void asignarReliquia(){
+        for (Zombie z : zombies){
+                z.setArmas(armas);
+                z.setReliquia(this.reliquia);
+            }
+            for (Arma a : armas){
+                a.setZombies(zombies);
+                }
     }
 
     public int getEspacioDisponible() {

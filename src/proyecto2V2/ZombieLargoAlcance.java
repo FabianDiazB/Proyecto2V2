@@ -24,10 +24,7 @@ public class ZombieLargoAlcance extends Zombie{
         
     }
 
-    @Override
-    public void mover() {
-
-    }
+  
 
     @Override
     public Arma detectar(ArrayList<Arma> enemigos) {

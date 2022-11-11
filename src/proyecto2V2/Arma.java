@@ -32,6 +32,7 @@ public abstract class Arma extends Thread implements Serializable {
         this.espacio = espacio;
     }
     
+    
     public abstract void atacar();
     public abstract void mover();
 

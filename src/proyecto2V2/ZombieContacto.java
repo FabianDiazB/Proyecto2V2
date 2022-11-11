@@ -22,31 +22,34 @@ public class ZombieContacto extends Zombie{
     public void atacar() {
     }
 
-    @Override
-    public void mover() {
-
-    }
+   
 
   
     @Override
     public Arma detectar(ArrayList<Arma> enemigos) {
-        for(Arma defensa: enemigos){
+        Arma defensa;
+        for(Arma d: enemigos){
+            defensa = d;
             int xD = defensa.getX();
             int yD = defensa.getY();
         
             int xZ = this.getX();
             int yZ = this.getY();
         
-            if((xZ>=(xD - 50)) && (yZ>=yD - 100 && yZ<=yD+100) ){
+            if((xZ>=(xD - 50)) && (yZ>=yD - 50 && yZ<=yD+100) ){
+                System.out.println("primero");
                 return defensa;
             }
-            if((xZ<= (xD +100)) && (yZ>=yD - 100 && yZ<=yD+100) ){
+            if((xZ<= (xD +100)) && (yZ>=yD - 50 && yZ<=yD+100) ){
+                System.out.println("segundo");
                 return defensa;
             }
-            if((yZ<= (yD -100)) && (xZ>=xD - 100 && xZ<=xD) ){
+            if((yZ>= (yD -50)) && (xZ>=xD - 50 && xZ<=xD+100) ){
+                System.out.println("tercero");
                 return defensa;
             }
-            if((yZ>= (yD +100)) && (xZ >= xD - 100  && xZ<=xD+100) ){
+            if((yZ>= (yD +100)) && (xZ >= xD - 50  && xZ<=xD+100) ){
+                System.out.println("cuarto");
                 return defensa;
             }
 
