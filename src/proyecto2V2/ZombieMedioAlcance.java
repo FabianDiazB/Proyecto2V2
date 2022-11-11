@@ -13,10 +13,12 @@ import java.util.ArrayList;
 
 public class ZombieMedioAlcance extends Zombie{
 
-    public ZombieMedioAlcance(int vida, int damage,String name,  String skin, String disparo, int lvlAparicion, int espacio) {
-        super(vida, damage, name, skin, disparo, lvlAparicion, espacio);
+    public ZombieMedioAlcance(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
+        super(vida, damage, nombre, skin, disparo, lvlAparicion, espacio);
     }
-    
+
+   
+   
 
     @Override
     public void atacar() {
@@ -48,9 +50,7 @@ public class ZombieMedioAlcance extends Zombie{
    }
 
     @Override
-    public Arma detectar(ArrayList<Arma> enemigos) {
-        System.out.println("detectando");
-        
+    public Arma detectar(ArrayList<Arma> enemigos) {        
         if(enemigos==null){
             return null;
         }

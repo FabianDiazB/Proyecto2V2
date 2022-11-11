@@ -173,7 +173,6 @@ public class GUIUsuario extends javax.swing.JFrame {
             // TODO add your handling code here:
             int index = jComboBox1.getSelectedIndex();
             Partida p = user.getPartidas().get(index);
-            p.toStringBichos();
             GUIJuego juego = new GUIJuego(p,bd);
             juego.setVisible(true);
         } catch (IOException ex) {

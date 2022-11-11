@@ -23,6 +23,7 @@ import java.awt.dnd.DropTargetListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import static java.lang.Thread.sleep;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -61,27 +62,25 @@ public class GUIJuego extends javax.swing.JFrame {
         System.out.println("partida añadida");
         this.bd = bd;
         System.out.println("base añadida");
-        
-       // generateTextFields();
-        if(this.partida.getMatriz() == null){
-            System.out.println(" matriz vacia");
-            this.matriz = this.partida.generateSlots(this.panelMapa); 
-            System.out.println("slots generados");
-            generateTextFields();
-            System.out.println("campos de arma generados");
-            generateReli();
-            System.out.println("campos generados");
-            
-        }else{
-            this.matriz = new JLabel[22][13];
-            this.matriz = this.partida.getMatriz();
-            System.out.println("si la cargó");
+        if(iniciada){
+            //restaurarArmas();
+            //generateReli();
+            //generateTextFields();
+            restaurarZombies();
             dibujar();
-            System.out.println("si la dibujo");
-        }
-        if(!iniciada){
-            generateReli();
-            generateTextFields();
+        }else{
+       // generateTextFields();
+            if(this.partida.getMatriz() == null){
+                this.matriz = this.partida.generateSlots(this.panelMapa); 
+                generateTextFields();
+                generateReli();
+
+            }else{
+                this.matriz = new JLabel[22][13];
+                this.matriz = this.partida.getMatriz();
+                dibujar();
+                //restaurarArmas();
+            }
         }
         
     }
@@ -99,6 +98,11 @@ public class GUIJuego extends javax.swing.JFrame {
 
     }
    
+    public void restaurarZombies(){
+        for(Zombie z: this.partida.zombies){
+            panelMapa.add(z.getLabelZ());
+        }
+    }
     private void generateReli(){
         JLabel reli = new JLabel("Reliquia");
         reli.setSize(50, 50);
@@ -160,6 +164,29 @@ public class GUIJuego extends javax.swing.JFrame {
         }
     }
     
+    public void pruebaZombis(){
+        try {
+            this.bd.guardar();
+        } catch (IOException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("no se puede guardar");
+        }
+        for(Zombie z: this.partida.getzDesplegados()){
+            try {
+                sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JLabel nuevo = new JLabel(z.getNombre());
+            nuevo.setSize(50,50);
+            nuevo.setLocation(z.getX(),z.getY());
+            z.setReliquia(this.partida.getReliquia());
+            z.setLabelZ(nuevo);
+            panelMapa.add(nuevo);
+            z.start();
+        }
+    }
+    
     public void pruebazombi(){
         System.out.println("creando zombie prueba");
         ZombieAereo z = new ZombieAereo(3, 3, "PRUEBA", "a", "b", 1, 3);
@@ -171,6 +198,7 @@ public class GUIJuego extends javax.swing.JFrame {
         panelMapa.add(nuevo);
         revalidate();
         z.setLabelZ(nuevo);
+        partida.zombies.add(z);
         z.start();
     }
     public void crearReliquia(){
@@ -405,6 +433,7 @@ public class GUIJuego extends javax.swing.JFrame {
         try {
             this.bd.guardar();
             JOptionPane.showMessageDialog(this, "Partida guardada","SAVE",JOptionPane.DEFAULT_OPTION);
+            this.partida.toStringZombies();
         } catch (IOException ex) {
             Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -428,8 +457,7 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
-        System.out.println("\n\n\n boton prueba accionado ");
-        guardarCoordenadas();
+        //pruebaZombis();
         pruebazombi();
     }//GEN-LAST:event_btnPruebaActionPerformed
 

@@ -21,9 +21,6 @@ public class ArmaLargoAlcance extends Arma{
         
     }
 
-    @Override
-    public void mover() {
-
-    }
+  
 }
     

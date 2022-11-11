@@ -22,9 +22,6 @@ public class ArmaBloque extends Arma{
         
     }
 
-    @Override
-    public void mover() {
-
-    }
+   
     
 }

@@ -21,9 +21,5 @@ public class ArmaAereo extends Arma{
         
     }
 
-    @Override
-    public void mover() {
-
-    }
 }
     

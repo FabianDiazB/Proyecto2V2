@@ -38,14 +38,12 @@ public abstract class Zombie extends Thread implements Serializable{
         this.caminando=true;
         this.lvlAparicion = lvlAparicion;
         this.espacio = espacio;
-        System.out.println("Creado");
     }
     
     public abstract Arma detectar(ArrayList<Arma> armas);
     public abstract void atacar();
     
     public void mover() throws InterruptedException{
-        System.out.println("moviendo");
         Arma detectado = detectar(armas);
         sleep(10);
         if(detectado!=null){

@@ -21,9 +21,6 @@ public class ArmaContacto extends Arma{
         
     }
 
-    @Override
-    public void mover() {
-
-    }
+    
     
 }

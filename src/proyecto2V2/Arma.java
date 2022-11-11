@@ -34,7 +34,6 @@ public abstract class Arma extends Thread implements Serializable {
     
     
     public abstract void atacar();
-    public abstract void mover();
 
     public int getVida() {
         return vida;

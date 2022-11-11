@@ -21,9 +21,6 @@ public class ArmaMedioAlcance extends Arma{
         
     }
 
-    @Override
-    public void mover() {
-
-    }
+   
 }
     
