@@ -111,6 +111,13 @@ public class Partida implements Serializable{
                     }
                 }
             this.bichos = bd;
+            for (Zombie z : zombies){
+                z.setArmas(armas);
+                z.setReliquia(this.reliquia);
+            }
+            for (Arma a : armas){
+                a.setZombies(zombies);
+            }
             }
             System.out.println("Base de datos de usuarios cargada.....");
         } catch (IOException | ClassNotFoundException e) {

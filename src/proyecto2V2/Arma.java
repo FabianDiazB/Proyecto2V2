@@ -5,6 +5,7 @@
 package proyecto2V2;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,7 +20,8 @@ public abstract class Arma extends Thread implements Serializable {
     private int lvlAparicion;
     private int espacio;
     private int x,y;
-
+    private ArrayList <Zombie> zombies;
+    
     public Arma(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
         this.damage = damage;
@@ -93,6 +95,12 @@ public abstract class Arma extends Thread implements Serializable {
     public String toString() {
         return "Arma{" + "vida=" + vida + ", damage=" + damage + ", nombre=" + nombre + ", skin=" + skin + ", disparo=" + disparo + ", lvlAparicion=" + lvlAparicion + ", espacio=" + espacio + '}';
     }
+
+    public void setZombies(ArrayList<Zombie> zombies) {
+        this.zombies = zombies;
+    }
+    
+    
     
     public void setCoordenadas(int x, int y){
         this.x = x;

@@ -6,6 +6,8 @@ package proyecto2V2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +24,8 @@ public abstract class Zombie extends Thread implements Serializable{
     private int x;
     private int y;
     private boolean caminando;
+    private Reliquia reliquia;
+    private ArrayList<Arma> armas;
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -29,15 +33,32 @@ public abstract class Zombie extends Thread implements Serializable{
         this.nombre = nombre;
         this.skin = skin;
         this.disparo = disparo;
-        this.caminando=false;
+        this.caminando=true;
         this.lvlAparicion = lvlAparicion;
         this.espacio = espacio;
         System.out.println("Creado");
     }
     
-    public abstract boolean detectar(ArrayList<Arma> enemigos);
+    public abstract Arma detectar(ArrayList<Arma> enemigos);
     public abstract void atacar();
-    public abstract void mover();
+    public void mover() throws InterruptedException{
+        sleep(1000);
+        Arma detectado = detectar(armas);
+        
+        if(detectado!=null){
+            this.caminando=false;
+            atacar();
+            return;
+        }
+
+        if (this.x < reliquia.getX()) 
+            this.x++;
+        else this.x--;
+        if (this.y < reliquia.getY())
+            this.y++;
+        else this.y++;
+ 
+    }
     
     public void ubicar(){
         System.out.println("entrando al ubicaaaaar");
@@ -66,6 +87,10 @@ public abstract class Zombie extends Thread implements Serializable{
         System.out.println("("+this.x +","+this.y+")");
         System.out.println("");
     }
+
+    public void setArmas(ArrayList<Arma> armas) {
+        this.armas = armas;
+    }
     
     public int getVida() {
         return vida;
@@ -85,6 +110,10 @@ public abstract class Zombie extends Thread implements Serializable{
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setReliquia(Reliquia reliquia) {
+        this.reliquia = reliquia;
     }
 
     public void setNombre(String nombre) {
@@ -156,7 +185,21 @@ public abstract class Zombie extends Thread implements Serializable{
     
     @Override
     public void run(){
+        boolean ejecutando=true;
         
+        while(ejecutando){
+            if(this.vida>0){
+                if(this.caminando==true){
+                    try {
+                        mover();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Zombie.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            else {ejecutando=false;
+            }
+        }
     }
     
     

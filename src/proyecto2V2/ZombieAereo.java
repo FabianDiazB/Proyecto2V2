@@ -30,9 +30,8 @@ public class ZombieAereo extends Zombie{
 
     }
 
-    
-   @Override
-    public boolean detectar(ArrayList<Arma> enemigos) {
+    @Override
+    public Arma detectar(ArrayList<Arma> enemigos) {
         for(Arma defensa: enemigos){
             int xD = defensa.getX();
             int yD = defensa.getY();
@@ -41,20 +40,19 @@ public class ZombieAereo extends Zombie{
             int yZ = this.getY();
         
             if((xZ>=(xD - 50)) && (yZ>=yD - 100 && yZ<=yD+100) ){
-                return true;
+                return defensa;
             }
             if((xZ<= (xD +100)) && (yZ>=yD - 100 && yZ<=yD+100) ){
-                return true;
-            }
+                return defensa;            }
             if((yZ<= (yD -100)) && (xZ>=xD - 100 && xZ<=xD) ){
-                return true;
+                return defensa;
             }
             if((yZ>= (yD +100)) && (xZ >= xD - 100  && xZ<=xD+100) ){
-                return true;
+                return defensa;
             }
 
         }
-        return false;
+        return null;
     }
 }
     

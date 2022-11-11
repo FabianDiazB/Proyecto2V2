@@ -30,7 +30,7 @@ public class ZombieMedioAlcance extends Zombie{
 
   
     @Override
-    public boolean detectar(ArrayList<Arma> enemigos) { 
+    public Arma detectar(ArrayList<Arma> enemigos) { 
         for(Arma defensa: enemigos){
             int xD = defensa.getX();
             int yD = defensa.getY();
@@ -39,19 +39,19 @@ public class ZombieMedioAlcance extends Zombie{
             int yZ = this.getY();
         
             if((xZ>=(xD - 100)) && (yZ>=yD - 150 && yZ<=yD+150) ){
-                return true;
+                return defensa;
             }
             if((xZ<= (xD +150)) && (yZ>=yD - 150 && yZ<=yD+150) ){
-                return true;
+                return defensa;
             }
             if((yZ<= (yD -150)) && (xZ>=xD - 150 && xZ<=xD) ){
-                return true;
+                return defensa;
             }
             if((yZ>= (yD +150)) && (xZ >= xD - 150  && xZ<=xD+150) ){
-                return true;
+                return defensa;
             }
 
         }
-        return false;
+        return null;
     }
 }
