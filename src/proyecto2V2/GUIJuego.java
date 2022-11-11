@@ -165,24 +165,22 @@ public class GUIJuego extends javax.swing.JFrame {
     }
     
     public void pruebaZombis(){
-        try {
-            this.bd.guardar();
-        } catch (IOException ex) {
-            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("no se puede guardar");
-        }
         for(Zombie z: this.partida.getzDesplegados()){
+            System.out.println("\n\nZombie desplegado:");
+            System.out.println(z.toString());
             try {
                 sleep(2000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
             }
+            //z.ubicar();
             JLabel nuevo = new JLabel(z.getNombre());
             nuevo.setSize(50,50);
             nuevo.setLocation(z.getX(),z.getY());
             z.setReliquia(this.partida.getReliquia());
             z.setLabelZ(nuevo);
             panelMapa.add(nuevo);
+            nuevo.setVisible(true);
             z.start();
         }
     }
@@ -457,8 +455,8 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
-        //pruebaZombis();
-        pruebazombi();
+        pruebaZombis();
+        //pruebazombi();
     }//GEN-LAST:event_btnPruebaActionPerformed
 
     /**
