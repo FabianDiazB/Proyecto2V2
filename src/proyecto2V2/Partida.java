@@ -31,8 +31,8 @@ public class Partida implements Serializable{
     String nombre;
     int espacioDisponible;
     ArrayList<Bicho> bichos;
-    ArrayList<Arma> armas;
-    ArrayList<Zombie> zombies;
+    ArrayList<Arma> armas=new ArrayList<Arma>();
+    ArrayList<Zombie> zombies =new ArrayList<Zombie>();
     JLabel matriz[][];
     
    
@@ -46,8 +46,6 @@ public class Partida implements Serializable{
             this.espacioDisponible= 10+(5*this.nivel);
         }
         this.nombre = "Partida ";
-        this.zombies = new ArrayList<Zombie>();
-        this.armas = new ArrayList<Arma>();
         try {
             try (ObjectInputStream leyendoFichero = new ObjectInputStream( 
                     new FileInputStream("bichos.txt") )) {
@@ -60,22 +58,22 @@ public class Partida implements Serializable{
                             switch(bicho.getTipoAtaque()){
                                 case "Aereo":
                                 ZombieAereo zombie = new ZombieAereo((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                                zombies.add(zombie);
+                                this.zombies.add(zombie);
                                 break;
                                 
                                 case "Medio alcance":
                                 ZombieMedioAlcance zombie1 = new ZombieMedioAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                                zombies.add(zombie1);
+                                this.zombies.add(zombie1);
                                 break;
                                 
                                 case "Contacto":
                                 ZombieContacto zombie2 = new ZombieContacto((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                                zombies.add(zombie2);
+                                this.zombies.add(zombie2);
                                 break;
                                 
                                 case "Largo alcance":
                                 ZombieLargoAlcance zombie3 = new ZombieLargoAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                                zombies.add(zombie3);
+                                this.zombies.add(zombie3);
                                 break;
 
                         }
@@ -85,27 +83,27 @@ public class Partida implements Serializable{
                         case "Aereo":
                             ArmaAereo arma = new ArmaAereo((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
                                     bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                            armas.add(arma);
+                            this.armas.add(arma);
                             break;
                         case "Medio alcance":
                             ArmaMedioAlcance arma1 = new ArmaMedioAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
                                     bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                            armas.add(arma1);
+                            this.armas.add(arma1);
                             break;
                         case "Contacto":
                             ArmaContacto arma2 = new ArmaContacto((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
                                     bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                            armas.add(arma2);
+                            this.armas.add(arma2);
                             break;
                         case "Largo alcance":
                             ArmaLargoAlcance arma3 = new ArmaLargoAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
                                     bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                            armas.add(arma3);
+                            this.armas.add(arma3);
                             break;
                             default:
                                 ArmaBloque arma4 = new ArmaBloque((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
-                                    bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                                armas.add(arma4);
+                                bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                                this.armas.add(arma4);
                             }
                         }
                     }
@@ -188,6 +186,10 @@ public class Partida implements Serializable{
         return matriz;
     }
     
-    
+    public void toStringBichos(){
+        for(Bicho b: this.bichos){
+            System.out.println(b.toString());
+        }
+    }
   
 }

@@ -28,6 +28,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -54,11 +55,9 @@ public class GUIJuego extends javax.swing.JFrame {
         initComponents();
         this.partida = p;
         this.bd = bd;
-        
+        generateTextFields();
         if(this.partida.getMatriz() ==null){
-            this.matriz = this.partida.generateSlots(this.panelMapa);
-            generateTextFields();
-            
+            this.matriz = this.partida.generateSlots(this.panelMapa);    
         }else{
             this.matriz = new JLabel[22][13];
             this.matriz = this.partida.getMatriz();
@@ -319,6 +318,7 @@ public class GUIJuego extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
             this.bd.guardar();
+            JOptionPane.showMessageDialog(this, "Partida guardada","SAVE",JOptionPane.DEFAULT_OPTION);
         } catch (IOException ex) {
             Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -333,10 +333,11 @@ public class GUIJuego extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.bd.guardar();
+            this.dispose();
         } catch (IOException ex) {
             Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose();
+        
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

@@ -143,6 +143,7 @@ public class GUIUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         Partida nueva = new Partida(1);
         System.out.println("Partida creada");
+        nueva.toStringBichos();
         user.setPartida(nueva);
         System.out.println("Partida añadida");
         try {
@@ -171,6 +172,7 @@ public class GUIUsuario extends javax.swing.JFrame {
             // TODO add your handling code here:
             int index = jComboBox1.getSelectedIndex();
             Partida p = user.getPartidas().get(index);
+            p.toStringBichos();
             GUIJuego juego = new GUIJuego(p,bd);
             juego.setVisible(true);
         } catch (IOException ex) {
