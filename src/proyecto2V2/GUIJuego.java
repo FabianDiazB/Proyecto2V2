@@ -160,7 +160,19 @@ public class GUIJuego extends javax.swing.JFrame {
         }
     }
     
-    
+    public void pruebazombi(){
+        System.out.println("creando zombie prueba");
+        ZombieAereo z = new ZombieAereo(3, 3, "PRUEBA", "a", "b", 1, 3);
+        z.ubicar();
+        JLabel nuevo = new JLabel(z.getNombre());
+        nuevo.setSize(50,50);
+        nuevo.setLocation(z.getX(), z.getY());
+        nuevo.setBounds(z.getX(), z.getY(), 50, 50);
+        nuevo.add(panelMapa);
+        
+//        z.setLabelZ(nuevo);
+//        z.start();
+    }
     public void crearReliquia(){
         
         javax.swing.JLabel reliquia = new javax.swing.JLabel();
@@ -400,7 +412,7 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
-        //pruebazombi();
+        pruebazombi();
     }//GEN-LAST:event_btnPruebaActionPerformed
 
     /**

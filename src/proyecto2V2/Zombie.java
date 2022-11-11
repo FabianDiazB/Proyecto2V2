@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
@@ -26,6 +27,7 @@ public abstract class Zombie extends Thread implements Serializable{
     private boolean caminando;
     private Reliquia reliquia;
     private ArrayList<Arma> armas;
+    private JLabel labelZ;
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -42,6 +44,7 @@ public abstract class Zombie extends Thread implements Serializable{
     public abstract Arma detectar(ArrayList<Arma> enemigos);
     public abstract void atacar();
     public void mover() throws InterruptedException{
+        System.out.println("moviendo");
         sleep(1000);
         Arma detectado = detectar(armas);
         
@@ -57,7 +60,15 @@ public abstract class Zombie extends Thread implements Serializable{
             this.y++;
         else this.y++;
         }
- 
+        this.labelZ.setLocation(x, y);
+    }
+
+    public JLabel getLabelZ() {
+        return labelZ;
+    }
+
+    public void setLabelZ(JLabel labelZ) {
+        this.labelZ = labelZ;
     }
     
     public void ubicar(){
@@ -188,6 +199,7 @@ public abstract class Zombie extends Thread implements Serializable{
         boolean ejecutando=true;
         
         while(ejecutando){
+            System.out.println("imprimiendo hilo");
             if(this.vida>0){
                 if(this.caminando==true){
                     try {
