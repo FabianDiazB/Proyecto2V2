@@ -39,12 +39,12 @@ public class ZombieAereo extends Zombie{
             int rx = defensa.getX();
             int ry = defensa.getY();
             rw += rx;
-            rh += rh;
+            rh += ry;
             tw += tx;
             th += ty;
             return ((rw < rx || rw > tx) &&
                     (rh < ry || rh > ty) &&
-                    (th < tx || tw > rx) &&
+                    (tw < tx || tw > rx) &&
                     (th < ty || th > ry));
    }
 
