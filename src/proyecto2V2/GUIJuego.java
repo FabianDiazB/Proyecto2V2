@@ -49,6 +49,7 @@ public class GUIJuego extends javax.swing.JFrame {
     private JLabel field;
     private JLabel matriz[][];
     private int reliq = 1;
+    boolean iniciada=false;
     /**
      * Creates new form GUIJuego
      */
@@ -62,11 +63,12 @@ public class GUIJuego extends javax.swing.JFrame {
         System.out.println("base añadida");
         
        // generateTextFields();
-        if(this.partida.getMatriz() ==null){
+        if(this.partida.getMatriz() == null){
             System.out.println(" matriz vacia");
             this.matriz = this.partida.generateSlots(this.panelMapa); 
             System.out.println("slots generados");
             generateTextFields();
+            System.out.println("campos de arma generados");
             generateReli();
             System.out.println("campos generados");
             
@@ -76,6 +78,10 @@ public class GUIJuego extends javax.swing.JFrame {
             System.out.println("si la cargó");
             dibujar();
             System.out.println("si la dibujo");
+        }
+        if(!iniciada){
+            generateReli();
+            generateTextFields();
         }
         
     }
@@ -90,13 +96,9 @@ public class GUIJuego extends javax.swing.JFrame {
                 panelMapa.add(this.matriz[i][j]);
             }
         }
-        threadMundano();
+
     }
-    public void threadMundano(){
-        while(true){
-            
-        }
-    }
+   
     private void generateReli(){
         JLabel reli = new JLabel("Reliquia");
         reli.setSize(50, 50);
@@ -106,19 +108,11 @@ public class GUIJuego extends javax.swing.JFrame {
         reli.addMouseListener(listener);
         reli.setVerticalTextPosition(JLabel.BOTTOM);
         panelBarra.add(reli);
+        partida.reliquia.setReliquia(reli);
         
         }
     private void generateTextFields(){
         int posX = 0;
-        JLabel reli = new JLabel("Reliquia");
-        reli.setSize(50, 50);
-        reli.setLocation(50+(60*posX++), 15);
-        reli.setTransferHandler(new TransferHandler("text"));
-        MouseListener listener = new DragMouseAdapter();
-        reli.addMouseListener(listener);
-        reli.setVerticalTextPosition(JLabel.BOTTOM);
-        panelBarra.add(reli);
-        
         for (Arma arma : partida.armas){
             label = new JLabel(arma.getNombre());     
             label.setSize(50, 50);
@@ -130,22 +124,39 @@ public class GUIJuego extends javax.swing.JFrame {
             panelBarra.add(label);
        }  
         
-    }           
+    }    
+    
         
     private class DragMouseAdapter extends MouseAdapter {
-
+        
+        
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
-            TransferHandler handler = c.getTransferHandler();
-            handler.exportAsDrag(c, e, TransferHandler.MOVE);
+            JLabel objeto = (JLabel) c;
+            if(objeto.getText().equals("Reliquia") && partida.reliquia.getReliquia().isEnabled()){
+                TransferHandler handler = c.getTransferHandler();
+                handler.exportAsDrag(c, e, TransferHandler.COPY);
+            }else{
+                if(objeto.getText().equals("Reliquia")){
+                    System.out.println("ya no tiene reliquias");
+                }else{
+                     TransferHandler handler = c.getTransferHandler();
+                    handler.exportAsDrag(c, e, TransferHandler.COPY);
+                }
+            }
+            if(objeto.getText().equals("Reliquia")){
+                partida.reliquia.getReliquia().setEnabled(false);
+            }
         }
     }
     private class Borrar extends MouseAdapter {
             public void mouseClicked(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
+            JLabel objeto = (JLabel) c;
             TransferHandler handler = c.getTransferHandler();
             JLabel label = (JLabel)c;
             label.setText("");
+            
         }
     }
     
@@ -174,7 +185,7 @@ public class GUIJuego extends javax.swing.JFrame {
         panelBarra = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSiguienteLvl = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -242,10 +253,10 @@ public class GUIJuego extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Siguiente Nivel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguienteLvl.setText("Siguiente Nivel");
+        btnSiguienteLvl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSiguienteLvlActionPerformed(evt);
             }
         });
 
@@ -283,7 +294,7 @@ public class GUIJuego extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +328,7 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -373,9 +384,9 @@ public class GUIJuego extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSiguienteLvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteLvlActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSiguienteLvlActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
@@ -427,12 +438,13 @@ public class GUIJuego extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField barraImagenes;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnPrueba;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSiguienteLvl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

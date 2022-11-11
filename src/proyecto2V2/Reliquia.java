@@ -5,6 +5,7 @@
 package proyecto2V2;
 
 import java.io.Serializable;
+import javax.swing.JLabel;
 
 /**
  *
@@ -12,11 +13,20 @@ import java.io.Serializable;
  */
 public class Reliquia implements Serializable {
     private int vida,x,y;
+    private JLabel reliquia;
 
 
     public Reliquia(int vida) {
         this.vida = vida;
 
+    }
+
+    public JLabel getReliquia() {
+        return reliquia;
+    }
+
+    public void setReliquia(JLabel reliquia) {
+        this.reliquia = reliquia;
     }
     
     public int getVida() {

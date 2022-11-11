@@ -146,6 +146,14 @@ public class Partida implements Serializable{
         }
         return matriz;
     }
+
+    public int getEspacioDisponible() {
+        return espacioDisponible;
+    }
+
+    public Reliquia getReliquia() {
+        return reliquia;
+    }
    
 
    private class DragMouseAdapt extends MouseAdapter {
@@ -154,8 +162,10 @@ public class Partida implements Serializable{
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
             JLabel l = (JLabel)c;
+            if(l.getText().equals("Reliquia")){
+                reliquia.getReliquia().setEnabled(true);
+            }
             l.setText("");
-            
         }
 
    }
