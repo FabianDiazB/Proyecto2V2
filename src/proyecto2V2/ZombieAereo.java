@@ -58,8 +58,7 @@ public class ZombieAereo extends Zombie{
         for(Arma defensa: enemigos){
             if(interseccion(defensa)) return defensa;
         }
-        return null;         
-        
+        return null;              
     }
 }
     
