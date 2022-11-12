@@ -101,6 +101,7 @@ public class GUIJuego extends javax.swing.JFrame {
     public void restaurarZombies(){
         for(Zombie z: this.partida.zombies){
             panelMapa.add(z.getLabelZ());
+            z.getLabelZ().setVisible(true);
         }
     }
     private void generateReli(){
