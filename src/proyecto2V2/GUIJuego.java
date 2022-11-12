@@ -165,6 +165,7 @@ public class GUIJuego extends javax.swing.JFrame {
         }
     }
     
+
     public void ejecutarThreads(){
         for (int i = 0; i<22; i++){
             for (int j = 0; j<13; j++){
@@ -209,7 +210,9 @@ public class GUIJuego extends javax.swing.JFrame {
                 
             }
         }
-        for(Arma a: this.partida.aDesplegados){
+
+        for(Arma a: partida.aDesplegados){
+            a.setZombies(partida.zDesplegados);
             a.start();
         }
         
@@ -223,6 +226,7 @@ public class GUIJuego extends javax.swing.JFrame {
             z.setLabelZ(nuevo);
             panelMapa.add(nuevo);
             nuevo.setVisible(true);
+            z.setArmas(partida.aDesplegados);
             z.start();
         }
     }
@@ -267,6 +271,7 @@ public class GUIJuego extends javax.swing.JFrame {
                     partida.reliquia.setY(matriz[i][j].getY());
                     return;
                 }
+                
             }
         }
     }

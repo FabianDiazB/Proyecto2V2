@@ -111,8 +111,9 @@ public class Partida implements Serializable{
                     }
                 }
             this.bichos = bd;
-           //asignarReliquia();
+            asignarReliquia();
             generarZDesplegables();
+            
             }
             System.out.println("Base de datos de usuarios cargada.....");
         } catch (IOException | ClassNotFoundException e) {

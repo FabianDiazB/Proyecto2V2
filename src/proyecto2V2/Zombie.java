@@ -46,7 +46,7 @@ public abstract class Zombie extends Thread implements Serializable{
     
     public abstract Arma detectar(ArrayList<Arma> armas);
     public void atacar(Arma arma){
-        System.out.println("atacandooo a" +arma.getNombre());
+        System.out.println("atacando a" +arma.getNombre());
         while(this.vida>0 && arma.isVivo()){
             arma.setVida(arma.getVida()-this.damage);
             //this.addRegistroAtq(this,arma);
@@ -236,9 +236,13 @@ public abstract class Zombie extends Thread implements Serializable{
     
     @Override
     public void run(){
+
+        
         ArmaContacto nueva =new ArmaContacto(20, 0, "Reliquia", "skin", "sin", 1, 0);
         nueva.setCoordenadas(reliquia.getX(), reliquia.getY());
+        
         armas.add(nueva);
+
         
         boolean ejecutando=true;
         while(ejecutando){
