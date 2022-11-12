@@ -161,6 +161,10 @@ public abstract class Arma extends Thread implements Serializable {
                 atacar(detectado);
             }
         }
+        if(vivo==false){
+            this.labelA.setText("");
+            System.out.println(this.nombre + "ha muerto");
+        }
     }
     
 }

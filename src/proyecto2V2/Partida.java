@@ -44,7 +44,7 @@ public class Partida implements Serializable{
     
     public Partida(int lvl){
         this.nivel = lvl; 
-        this.cantidadZombies =5 + this.nivel*3;
+        this.cantidadZombies =2;//5 + this.nivel*3;
         this.reliquia = new Reliquia(20);
         if(this.nivel==1){
             this.espacioDisponible=15;
@@ -224,6 +224,7 @@ public class Partida implements Serializable{
                 reliquia.getReliquia().setEnabled(true);
             }
             l.setText("");
+            l.setIcon(null);
         }
 
    }

@@ -68,6 +68,8 @@ public class GUIJuego extends javax.swing.JFrame {
             //generateTextFields();
             restaurarZombies();
             dibujar();
+            panelBarra.setVisible(false);
+
         }else{
        // generateTextFields();
             if(this.partida.getMatriz() == null){
@@ -113,6 +115,8 @@ public class GUIJuego extends javax.swing.JFrame {
         reli.addMouseListener(listener);
         reli.setVerticalTextPosition(JLabel.BOTTOM);
         panelBarra.add(reli);
+        reli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2V2/reli.png")));
+
         this.partida.reliquia.setReliquia(reli);
         
         }
@@ -265,6 +269,7 @@ public class GUIJuego extends javax.swing.JFrame {
         for (int i = 0; i<22; i++){
             for (int j = 0; j<13; j++){
                 if(matriz[i][j].getText().equals("Reliquia")){
+                    matriz[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2V2/reli.png")));
                     System.out.println(matriz[i][j].getX());
                     System.out.println(matriz[i][j].getY());
                     partida.reliquia.setX(matriz[i][j].getX());
@@ -428,7 +433,7 @@ public class GUIJuego extends javax.swing.JFrame {
                     .addComponent(lblnivel))
                 .addGap(144, 144, 144)
                 .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -479,6 +484,7 @@ public class GUIJuego extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guardarCoordenadas();
+        partida.asignarReliquia();
         try {
             this.bd.guardar();
             JOptionPane.showMessageDialog(this, "Partida guardada","SAVE",JOptionPane.DEFAULT_OPTION);
@@ -507,7 +513,9 @@ public class GUIJuego extends javax.swing.JFrame {
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
         ejecutarThreads();
-        //pruebazombi();
+        panelBarra.setVisible(false);
+
+        this.iniciada=true;
     }//GEN-LAST:event_btnPruebaActionPerformed
 
     /**

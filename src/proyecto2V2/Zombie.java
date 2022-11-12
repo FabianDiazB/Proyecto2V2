@@ -31,6 +31,7 @@ public abstract class Zombie extends Thread implements Serializable{
     private boolean vivo = true;
     public ArrayList <String> registroAtq = new ArrayList<String>();
     public ArrayList <String> registroDmg = new ArrayList<String>();
+    boolean ejecutando = true;
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -44,19 +45,22 @@ public abstract class Zombie extends Thread implements Serializable{
         this.vivo = true;
     }
     
+    
     public abstract Arma detectar(ArrayList<Arma> armas);
     public void atacar(Arma arma){
-        System.out.println("atacando a" +arma.getNombre());
+        System.out.println(this.getNombre()+" atacando a" +arma.getNombre());
         while(this.vida>0 && arma.isVivo()){
             arma.setVida(arma.getVida()-this.damage);
             //this.addRegistroAtq(this,arma);
             //arma.addRegistroDmg(this, arma);
         }
+        if(this.vida<=0){
+            System.out.println(this.getNombre() +" ha muerto");
+            this.vivo=(false);
+            this.ejecutando=false;
+        }
         //registro.add();
-        arma.setVivo(false);
-        arma.getLabelA().setText("");
-        arma.getLabelA().setVisible(false);
-        armas.remove(arma); 
+        
         
     }    
     
@@ -238,13 +242,9 @@ public abstract class Zombie extends Thread implements Serializable{
     public void run(){
 
         
-        ArmaContacto nueva =new ArmaContacto(20, 0, "Reliquia", "skin", "sin", 1, 0);
+        ArmaContacto nueva =new ArmaContacto(reliquia.getVida(), 0, "Reliquia", "skin", "sin", 1, 0);
         nueva.setCoordenadas(reliquia.getX(), reliquia.getY());
-        
         armas.add(nueva);
-
-        
-        boolean ejecutando=true;
         while(ejecutando){
             //System.out.println("("+this.x+","+this.y+")");
             if(this.vida>0){
@@ -259,10 +259,12 @@ public abstract class Zombie extends Thread implements Serializable{
                     //atacar aqui
                 }
             }
-            else {ejecutando=false;
-            }
+            if(vivo==false){
+            this.labelZ.setText("");
+            System.out.println(this.nombre + "ha muerto");
         }
     }
+ }
     
     
     
