@@ -181,12 +181,6 @@ public class GUIJuego extends javax.swing.JFrame {
                                     nuevo.setLabelA(matriz[i][j]);
                                     partida.aDesplegados.add(nuevo);
                                     break;
-                                case "ArmaBloque":
-                                    ArmaBloque nuevo1 = new ArmaBloque(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
-                                    nuevo1.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
-                                    nuevo1.setLabelA(matriz[i][j]);
-                                    partida.aDesplegados.add(nuevo1);
-                                    break;
                                 case "ArmaAereo":
                                     ArmaAereo nuevo2 = new ArmaAereo(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
                                     nuevo2.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
@@ -215,22 +209,22 @@ public class GUIJuego extends javax.swing.JFrame {
                 
             }
         }
-//         System.out.println("Armas desplegadas en partidas");
-//         partida.toStringZDesplegados();
+        for(Arma a: this.partida.aDesplegados){
+            a.start();
+        }
         
-        
-//        for(Zombie z: this.partida.zDesplegados){
-//            System.out.println("\n\nZombie desplegado:");
-//            System.out.println(z.toString());
-//            JLabel nuevo = new JLabel(z.getNombre());
-//            nuevo.setSize(50,50);
-//            nuevo.setLocation(z.getX(),z.getY());
-//            z.setReliquia(this.partida.getReliquia());
-//            z.setLabelZ(nuevo);
-//            panelMapa.add(nuevo);
-//            nuevo.setVisible(true);
-//            z.start();
-//        }
+        for(Zombie z: this.partida.zDesplegados){
+            System.out.println("\n\nZombie desplegado:");
+            System.out.println(z.toString());
+            JLabel nuevo = new JLabel(z.getNombre());
+            nuevo.setSize(50,50);
+            nuevo.setLocation(z.getX(),z.getY());
+            z.setReliquia(this.partida.getReliquia());
+            z.setLabelZ(nuevo);
+            panelMapa.add(nuevo);
+            nuevo.setVisible(true);
+            z.start();
+        }
     }
     
     public void pruebazombi(){

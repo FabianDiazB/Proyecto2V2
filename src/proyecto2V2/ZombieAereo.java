@@ -53,7 +53,10 @@ public class ZombieAereo extends Zombie{
             return null;
         }
         for(Arma defensa: enemigos){
-            if(interseccion(defensa) && defensa.isVivo()) return defensa;
+            if(interseccion(defensa) && defensa.isVivo()){
+                System.out.println("ha detectado arma");
+                return defensa;
+            }
         }
         return null;           
     }

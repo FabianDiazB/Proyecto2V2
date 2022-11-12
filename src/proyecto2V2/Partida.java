@@ -106,10 +106,6 @@ public class Partida implements Serializable{
                                     bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                             this.armas.add(arma3);
                             break;
-                            default:
-                                ArmaBloque arma4 = new ArmaBloque((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),
-                                bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
-                                this.armas.add(arma4);
                             }
                         }
                     }
@@ -146,7 +142,7 @@ public class Partida implements Serializable{
     }
     public void asignarReliquia(){
         for (Zombie z : this.zDesplegados){
-                z.setArmas(armas);
+                z.setArmas(this.aDesplegados);
                 z.setReliquia(this.reliquia);
             }
             for (Arma a : armas){
