@@ -37,6 +37,7 @@ public class Partida implements Serializable{
     Reliquia reliquia;
     int cantidadZombies;
     ArrayList<Zombie> zDesplegados = new ArrayList<Zombie>();
+    ArrayList<Arma> aDesplegados = new ArrayList<Arma>();
     
    
     
@@ -160,6 +161,16 @@ public class Partida implements Serializable{
     public Reliquia getReliquia() {
         return reliquia;
     }
+
+    public ArrayList<Arma> getaDesplegados() {
+        return aDesplegados;
+    }
+
+    public void setaDesplegados(ArrayList<Arma> aDesplegados) {
+        this.aDesplegados = aDesplegados;
+    }
+    
+    
     
     public void generarZDesplegables(){ 
         for (int i = 0; i < cantidadZombies; i++){
@@ -263,6 +274,14 @@ public class Partida implements Serializable{
   
     public void toStringZombies(){
         for(Zombie b: this.zombies){
+            System.out.println(b.toString());
+        }
+        
+        
+    }
+    
+    public void toStringZDesplegados(){
+        for(Arma b: this.aDesplegados){
             System.out.println(b.toString());
         }
         

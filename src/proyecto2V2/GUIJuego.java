@@ -164,19 +164,72 @@ public class GUIJuego extends javax.swing.JFrame {
         }
     }
     
-    public void pruebaZombis(){
-        for(Zombie z: this.partida.zDesplegados){
-            System.out.println("\n\nZombie desplegado:");
-            System.out.println(z.toString());
-            JLabel nuevo = new JLabel(z.getNombre());
-            nuevo.setSize(50,50);
-            nuevo.setLocation(z.getX(),z.getY());
-            z.setReliquia(this.partida.getReliquia());
-            z.setLabelZ(nuevo);
-            panelMapa.add(nuevo);
-            nuevo.setVisible(true);
-            z.start();
+    public void ejecutarThreads(){
+        for (int i = 0; i<22; i++){
+            for (int j = 0; j<13; j++){
+                String textoLbl =this.matriz[i][j].getText();
+                if(!(textoLbl.equals(""))){
+                    for(Arma defensa: partida.getArmas()){
+                        if(textoLbl.equals(defensa.getNombre())){
+                            String tipoDefensa = defensa.getClass().getSimpleName();
+                            System.out.println(tipoDefensa);
+                            switch (tipoDefensa) {
+                                case "ArmaContaco":
+                                    ArmaContacto nuevo = new ArmaContacto(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
+                                    nuevo.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
+                                    nuevo.setLabelA(matriz[i][j]);
+                                    partida.aDesplegados.add(nuevo);
+                                    break;
+                                case "ArmaBloque":
+                                    ArmaBloque nuevo1 = new ArmaBloque(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
+                                    nuevo1.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
+                                    nuevo1.setLabelA(matriz[i][j]);
+                                    partida.aDesplegados.add(nuevo1);
+                                    break;
+                                case "ArmaAereo":
+                                    ArmaAereo nuevo2 = new ArmaAereo(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
+                                    nuevo2.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
+                                    nuevo2.setLabelA(matriz[i][j]);
+                                    partida.aDesplegados.add(nuevo2);
+                                    break;
+                                case "ArmaMedioAlcance":
+                                    ArmaMedioAlcance nuevo3 = new ArmaMedioAlcance(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
+                                    nuevo3.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
+                                    nuevo3.setLabelA(matriz[i][j]);
+                                    partida.aDesplegados.add(nuevo3);
+                                    break;
+                                case "ArmaLargoAlcance":
+                                    ArmaLargoAlcance nuevo4 = new ArmaLargoAlcance(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
+                                    nuevo4.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
+                                    nuevo4.setLabelA(matriz[i][j]);
+                                    partida.aDesplegados.add(nuevo4);
+                                    break;
+                                
+                            }
+                        }
+                    }
+                }else{
+                    continue;
+                }
+                
+            }
         }
+//         System.out.println("Armas desplegadas en partidas");
+//         partida.toStringZDesplegados();
+        
+        
+//        for(Zombie z: this.partida.zDesplegados){
+//            System.out.println("\n\nZombie desplegado:");
+//            System.out.println(z.toString());
+//            JLabel nuevo = new JLabel(z.getNombre());
+//            nuevo.setSize(50,50);
+//            nuevo.setLocation(z.getX(),z.getY());
+//            z.setReliquia(this.partida.getReliquia());
+//            z.setLabelZ(nuevo);
+//            panelMapa.add(nuevo);
+//            nuevo.setVisible(true);
+//            z.start();
+//        }
     }
     
     public void pruebazombi(){
@@ -321,7 +374,11 @@ public class GUIJuego extends javax.swing.JFrame {
             }
         });
 
-        btnPrueba.setText("prueba");
+        btnPrueba.setBackground(new java.awt.Color(0, 204, 0));
+        btnPrueba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnPrueba.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrueba.setText("Iniciar");
+        btnPrueba.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 255, 204), new java.awt.Color(51, 255, 204), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 204, 204)));
         btnPrueba.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPruebaActionPerformed(evt);
@@ -353,7 +410,7 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPrueba)
+                .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -369,8 +426,8 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblnivel))
-                .addGap(110, 110, 110)
-                .addComponent(btnPrueba)
+                .addGap(144, 144, 144)
+                .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -449,7 +506,7 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
-        pruebaZombis();
+        ejecutarThreads();
         //pruebazombi();
     }//GEN-LAST:event_btnPruebaActionPerformed
 
