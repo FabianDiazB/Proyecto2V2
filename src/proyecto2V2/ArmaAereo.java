@@ -22,8 +22,8 @@ public class ArmaAereo extends Arma{
     public void atacar(Zombie zombie) {
         while(this.getVida()>0 && zombie.isVivo()){
             zombie.setVida(zombie.getVida()-this.getDamage());
-            this.addRegistroAtq(zombie,this);
-            zombie.addRegistroDmg(zombie, this);
+            //this.addRegistroAtq(zombie,this);
+            //zombie.addRegistroDmg(zombie, this);
             this.setAtacando(true);
         }
         this.setAtacando(false);
@@ -39,7 +39,7 @@ public class ArmaAereo extends Arma{
             return null;
         }
         for(Zombie z: zombies){
-            if(interseccion(z) && z.getClass().getSimpleName().equals("ZombieAereo")) return z;
+            if(interseccion(z) && z.getClass().getSimpleName().equals("ZombieAereo")&& z.isVivo()) return z;
         }
         return null;  
     }

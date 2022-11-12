@@ -29,8 +29,8 @@ public abstract class Zombie extends Thread implements Serializable{
     private ArrayList<Arma> armas = new ArrayList<Arma>();
     private JLabel labelZ;
     private boolean vivo = true;
-    public ArrayList <String> registroAtq;
-    public ArrayList <String> registroDmg;
+    public ArrayList <String> registroAtq = new ArrayList<String>();
+    public ArrayList <String> registroDmg = new ArrayList<String>();
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -48,8 +48,8 @@ public abstract class Zombie extends Thread implements Serializable{
     public void atacar(Arma arma){
         while(this.vida>0 && arma.isVivo()){
             arma.setVida(arma.getVida()-this.damage);
-            this.addRegistroAtq(this,arma);
-            arma.addRegistroDmg(this, arma);
+            //this.addRegistroAtq(this,arma);
+            //arma.addRegistroDmg(this, arma);
         }
         //registro.add();
         arma.setVivo(false);

@@ -22,8 +22,8 @@ public class ArmaLargoAlcance extends Arma{
     public void atacar(Zombie zombie) {
         while(this.getVida()>0 && zombie.isVivo()){
             zombie.setVida(zombie.getVida()-this.getDamage());
-            this.addRegistroAtq(zombie,this);
-            zombie.addRegistroDmg(zombie, this);
+            //this.addRegistroAtq(zombie,this);
+            //zombie.addRegistroDmg(zombie, this);
             this.setAtacando(true);
         }
         this.setAtacando(false);
@@ -38,7 +38,7 @@ public class ArmaLargoAlcance extends Arma{
             return null;
         }
         for(Zombie z: zombies){
-            if(interseccion(z)) return z;
+            if(interseccion(z) && z.isVivo()) return z;
         }
         return null; 
     }

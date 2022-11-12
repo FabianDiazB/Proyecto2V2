@@ -25,8 +25,8 @@ public abstract class Arma extends Thread implements Serializable {
     public JLabel labelA;
     private boolean vivo;
     private boolean atacando;
-    public ArrayList <String> registroAtq;
-    public ArrayList <String> registroDmg;
+    public ArrayList <String> registroAtq= new ArrayList<String>();
+    public ArrayList <String> registroDmg= new ArrayList<String>();
     
     public Arma(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
