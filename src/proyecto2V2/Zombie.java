@@ -28,6 +28,9 @@ public abstract class Zombie extends Thread implements Serializable{
     private Reliquia reliquia;
     private ArrayList<Arma> armas = new ArrayList<Arma>();
     private JLabel labelZ;
+    private boolean vivo = true;
+    public ArrayList <String> registroAtq;
+    public ArrayList <String> registroDmg;
 
     public Zombie(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -38,17 +41,38 @@ public abstract class Zombie extends Thread implements Serializable{
         this.caminando=true;
         this.lvlAparicion = lvlAparicion;
         this.espacio = espacio;
+        this.vivo = true;
     }
     
     public abstract Arma detectar(ArrayList<Arma> armas);
-    public abstract void atacar();
+    public void atacar(Arma arma){
+        while(this.vida>0 && arma.isVivo()){
+            arma.setVida(arma.getVida()-this.damage);
+            this.addRegistroAtq(this,arma);
+            arma.addRegistroDmg(this, arma);
+        }
+        //registro.add();
+        arma.setVivo(false);
+        arma.getLabelA().setText("");
+        arma.getLabelA().setVisible(false);
+        armas.remove(arma); 
+        
+    }    
+    
+    public void addRegistroDmg(Zombie zombie, Arma arma){
+        registroAtq.add(arma.getNombre() + " recibio un golpe por: " + zombie.getDamage() + " de <- " + zombie.getNombre());
+    }
+    
+    public void addRegistroAtq(Zombie zombie, Arma arma){
+        registroAtq.add(arma.getNombre() + " ataque por: " + arma.getDamage() + " a -> " + zombie.getNombre());
+    }
     
     public void mover() throws InterruptedException{
         Arma detectado = detectar(armas);
         sleep(10);
         if(detectado!=null){
             this.caminando=false;
-            //atacar();
+            atacar(detectado);
         }else{
         if (this.x < reliquia.getX()) 
             this.x++;
@@ -176,6 +200,14 @@ public abstract class Zombie extends Thread implements Serializable{
 
     public int getY() {
         return y;
+    }
+
+    public void setVivo(boolean vivo) {
+        this.vivo = vivo;
+    }
+
+    public boolean isVivo() {
+        return vivo;
     }
 
     public boolean isCaminando() {

@@ -114,7 +114,7 @@ public class Partida implements Serializable{
                     }
                 }
             this.bichos = bd;
-            asignarReliquia();
+           //asignarReliquia();
             generarZDesplegables();
             }
             System.out.println("Base de datos de usuarios cargada.....");
@@ -176,18 +176,14 @@ public class Partida implements Serializable{
                                         (int)zR.getLvlAparicion(),(int)zR.getEspacio()); 
                     nuevo.ubicar();
                     
-                    this.zDesplegados.add(nuevo);
-                    System.out.println("add uno aereo");
-                    
+                    this.zDesplegados.add(nuevo);                    
                     break;
                 case "ZombieContacto":
                     ZombieContacto nuevo1 = new ZombieContacto((int)zR.getVida(),
                                         (int)zR.getDamage(),zR.getNombre(),zR.getSkin(),zR.getDisparo(),
                                         (int)zR.getLvlAparicion(),(int)zR.getEspacio()); 
                     nuevo1.ubicar();
-                    this.zDesplegados.add(nuevo1);
-                    System.out.println("add uno contacto");
-                    
+                    this.zDesplegados.add(nuevo1);                   
                     break;
                 case "ZombieMedioAlcance":
                     ZombieMedioAlcance nuevo2 = new ZombieMedioAlcance((int)zR.getVida(),
@@ -195,8 +191,6 @@ public class Partida implements Serializable{
                                         (int)zR.getLvlAparicion(),(int)zR.getEspacio()); 
                     nuevo2.ubicar();
                     this.zDesplegados.add(nuevo2);
-                    System.out.println("add uno medio");
-                    
                     break;
                 case "ZombieLargoAlcance":
                     ZombieLargoAlcance nuevo3 = new ZombieLargoAlcance((int)zR.getVida(),
@@ -204,7 +198,6 @@ public class Partida implements Serializable{
                                         (int)zR.getLvlAparicion(),(int)zR.getEspacio()); 
                     nuevo3.ubicar();
                     this.zDesplegados.add(nuevo3);
-                    System.out.println("add uno largo");
                     break;
             }
             

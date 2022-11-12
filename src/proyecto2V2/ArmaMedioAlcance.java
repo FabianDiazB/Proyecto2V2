@@ -4,6 +4,8 @@
  */
 package proyecto2V2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
@@ -17,10 +19,52 @@ public class ArmaMedioAlcance extends Arma{
     
 
     @Override
-    public void atacar() {
-        
+    public void atacar(Zombie zombie) {
+        while(this.getVida()>0 && zombie.isVivo()){
+            zombie.setVida(zombie.getVida()-this.getDamage());
+            this.addRegistroAtq(zombie,this);
+            zombie.addRegistroDmg(zombie, this);
+            this.setAtacando(true);
+        }
+        this.setAtacando(false);
+        zombie.setVivo(false);
+        zombie.getLabelZ().setText("");
+        zombie.getLabelZ().setVisible(false);
+        zombies.remove(zombie); 
     }
 
+    @Override
+    public Zombie detectar(ArrayList<Zombie> zombies) {
+        if(zombies==null){
+            return null;
+        }
+        for(Zombie z: zombies){
+            if(interseccion(z)) return z;
+        }
+        return null; 
+    }
+
+     public boolean interseccion(Zombie defensa){
+            int tw = 100;
+            int th = 100;
+            int rw = 100;
+            int rh = 100;
+            if(rw<=0 || rh <=0 || tw<=0 || th <= 0){
+                return false;
+            }
+            int tx = this.getX();
+            int ty = this.getY();
+            int rx = defensa.getX();
+            int ry = defensa.getY();
+            rw += rx;
+            rh += ry;
+            tw += tx;
+            th += ty;
+            return ((rw < rx || rw > tx) &&
+                    (rh < ry || rh > ty) &&
+                    (tw < tx || tw > rx) &&
+                    (th < ty || th > ry));
+   }
    
 }
     

@@ -19,19 +19,15 @@ public class ZombieLargoAlcance extends Zombie{
 
     
     
-    @Override
-    public void atacar() {
-        
-    }
-
+    
   
 
    public boolean interseccion(Arma defensa){
         
-            int tw = 150;
-            int th = 150;
-            int rw = 50;
-            int rh = 50;
+            int tw = 200;
+            int th = 200;
+            int rw = 200;
+            int rh = 200;
             if(rw<=0 || rh <=0 || tw<=0 || th <= 0){
                 return false;
             }

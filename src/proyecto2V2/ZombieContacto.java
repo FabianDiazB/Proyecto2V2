@@ -22,12 +22,6 @@ public class ZombieContacto extends Zombie{
     
     
 
-    @Override
-    public void atacar() {
-    }
-
-   
-
   
    public boolean interseccion(Arma defensa){
 

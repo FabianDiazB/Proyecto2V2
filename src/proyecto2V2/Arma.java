@@ -6,6 +6,7 @@ package proyecto2V2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -20,7 +21,12 @@ public abstract class Arma extends Thread implements Serializable {
     private int lvlAparicion;
     private int espacio;
     private int x,y;
-    private ArrayList <Zombie> zombies;
+    public ArrayList <Zombie> zombies = new ArrayList<Zombie>();
+    public JLabel labelA;
+    private boolean vivo;
+    private boolean atacando;
+    public ArrayList <String> registroAtq;
+    public ArrayList <String> registroDmg;
     
     public Arma(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         this.vida = vida;
@@ -30,19 +36,49 @@ public abstract class Arma extends Thread implements Serializable {
         this.disparo = disparo;
         this.lvlAparicion = lvlAparicion;
         this.espacio = espacio;
+        this.vivo = true;
+        this.atacando = false;
     }
     
     
-    public abstract void atacar();
-
+    public abstract Zombie detectar(ArrayList<Zombie> zombies);
+    public abstract void atacar(Zombie zombie);
+        
+    public void addRegistroDmg(Zombie zombie, Arma arma){
+        registroAtq.add(arma.getNombre() + " recibio un golpe por: " + zombie.getDamage() + " de <- " + zombie.getNombre());
+    }
+    
+    public void addRegistroAtq(Zombie zombie, Arma arma){
+        registroAtq.add(arma.getNombre() + " ataque por: " + arma.getDamage() + " a -> " + zombie.getNombre());
+    }
     public int getVida() {
         return vida;
+    }
+    public void setAtacando(boolean s){
+        this.atacando = s;
     }
 
     public void setVida(int vida) {
         this.vida = vida;
     }
 
+    public JLabel getLabelA() {
+        return labelA;
+    }
+
+    public boolean isVivo() {
+        return vivo;
+    }
+
+    public void setVivo(boolean vivo) {
+        this.vivo = vivo;
+    }
+
+    public void setLabelA(JLabel labelA) {
+        this.labelA = labelA;
+    }
+
+    
     public int getDamage() {
         return damage;
     }
@@ -118,7 +154,13 @@ public abstract class Arma extends Thread implements Serializable {
     
     
     public void run(){
-        
+        while(this.vivo == true){
+            Zombie detectado = detectar(this.zombies);
+            if (detectado!= null && atacando == false){
+                this.atacando = true;
+                atacar(detectado);
+            }
+        }
     }
     
 }

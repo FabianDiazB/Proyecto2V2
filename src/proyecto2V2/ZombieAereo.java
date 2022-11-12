@@ -23,17 +23,13 @@ public class ZombieAereo extends Zombie{
     
     
 
-    @Override
-    public void atacar() {
-        
-    }
-
+   
    public boolean interseccion(Arma defensa){
         
-            int tw = 50;
-            int th = 50;
-            int rw = 50;
-            int rh = 50;
+            int tw = 0;
+            int th = 0;
+            int rw = 0;
+            int rh = 0;
             if(rw<=0 || rh <=0 || tw<=0 || th <= 0){
                 return false;
             }
@@ -53,7 +49,6 @@ public class ZombieAereo extends Zombie{
 
     @Override
     public Arma detectar(ArrayList<Arma> enemigos) {
-        
         if(enemigos==null){
             return null;
         }

@@ -20,18 +20,14 @@ public class ZombieMedioAlcance extends Zombie{
    
    
 
-    @Override
-    public void atacar() {
-        
-    }
 
  
   
    public boolean interseccion(Arma defensa){
             int tw = 100;
             int th = 100;
-            int rw = 50;
-            int rh = 50;
+            int rw = 100;
+            int rh = 100;
             if(rw<=0 || rh <=0 || tw<=0 || th <= 0){
                 return false;
             }
