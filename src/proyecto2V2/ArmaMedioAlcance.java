@@ -26,11 +26,17 @@ public class ArmaMedioAlcance extends Arma{
             //zombie.addRegistroDmg(zombie, this);
             this.setAtacando(true);
         }
-        this.setAtacando(false);
-        zombie.setVivo(false);
-        zombie.getLabelZ().setText("");
-        zombie.getLabelZ().setVisible(false);
-        zombies.remove(zombie); 
+        if(this.getVida()<=0){
+            System.out.println(this.getNombre() +" ha muerto");
+            this.setVivo(false);
+            return;
+        }
+        if(zombie.getVida()<=0){
+            zombie.setVivo(false);
+            this.zombies.remove(zombie);
+            zombie.getLabelZ().setText("");
+            return;
+        } 
     }
 
     @Override

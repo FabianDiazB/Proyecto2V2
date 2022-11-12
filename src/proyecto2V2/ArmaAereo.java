@@ -20,17 +20,24 @@ public class ArmaAereo extends Arma{
 
     @Override
     public void atacar(Zombie zombie) {
-        while(this.getVida()>0 && zombie.isVivo()){
+        while(this.getVida()>0 && zombie.getVida()>0){
             zombie.setVida(zombie.getVida()-this.getDamage());
+            System.out.println(this.getNombre() + " atacando a " + zombie.getNombre());
             //this.addRegistroAtq(zombie,this);
             //zombie.addRegistroDmg(zombie, this);
             this.setAtacando(true);
         }
-        this.setAtacando(false);
-        zombie.setVivo(false);
-        zombie.getLabelZ().setText("");
-        zombie.getLabelZ().setVisible(false);
-        zombies.remove(zombie); 
+        if(this.getVida()<=0){
+            System.out.println(this.getNombre() +" ha muerto");
+            this.setVivo(false);
+            return;
+        }
+        if(zombie.getVida()<=0){
+            zombie.setVivo(false);
+            this.zombies.remove(zombie);
+            zombie.getLabelZ().setText("");
+            return;
+        } 
     }
 
     @Override
