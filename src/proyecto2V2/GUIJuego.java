@@ -51,17 +51,21 @@ public class GUIJuego extends javax.swing.JFrame {
     private JLabel matriz[][];
     private int reliq = 1;
     boolean iniciada=false;
+    private Usuario usuario;
     /**
      * Creates new form GUIJuego
      */
-    public GUIJuego(Partida p, BDUsuario bd) throws IOException, ClassNotFoundException {
+    public GUIJuego(Partida p, BDUsuario bd, Usuario u) throws IOException, ClassNotFoundException {
         System.out.println("comenzando a crear");
         initComponents();
         System.out.println("componentes creados");
         this.partida = p;
         System.out.println("partida añadida");
         this.bd = bd;
+        this.usuario = u;
         System.out.println("base añadida");
+        this.lblnivel.repaint();
+        this.lblnivel.setText(""+p.getNivel());
         if(iniciada){
             //restaurarArmas();
             //generateReli();
@@ -71,10 +75,10 @@ public class GUIJuego extends javax.swing.JFrame {
             panelBarra.setVisible(false);
 
         }else{
-       // generateTextFields();
+            generateTextFields();
             if(this.partida.getMatriz() == null){
                 this.matriz = this.partida.generateSlots(this.panelMapa); 
-                generateTextFields();
+                //generateTextFields();
                 generateReli();
 
             }else{
@@ -221,7 +225,7 @@ public class GUIJuego extends javax.swing.JFrame {
         }
         
         for(Zombie z: this.partida.zDesplegados){
-            System.out.println("\n\nZombie desplegado:");
+            System.out.println("\nZombie desplegado:");
             System.out.println(z.toString());
             JLabel nuevo = new JLabel(z.getNombre());
             nuevo.setSize(50,50);
@@ -338,8 +342,8 @@ public class GUIJuego extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnGuardar.setBackground(new java.awt.Color(255, 0, 51));
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btnGuardar.setBackground(new java.awt.Color(0, 51, 0));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar Juego");
         btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(102, 102, 102), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 204, 204)));
@@ -357,6 +361,9 @@ public class GUIJuego extends javax.swing.JFrame {
             }
         });
 
+        btnSiguienteLvl.setBackground(new java.awt.Color(0, 51, 0));
+        btnSiguienteLvl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSiguienteLvl.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguienteLvl.setText("Siguiente Nivel");
         btnSiguienteLvl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,12 +373,15 @@ public class GUIJuego extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre");
 
-        jLabel3.setText("________________________");
+        jLabel3.setText("_________________________");
 
         jLabel4.setText("Nivel: ");
 
         lblnivel.setText("0");
 
+        btnSalir.setBackground(new java.awt.Color(51, 0, 0));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -395,28 +405,26 @@ public class GUIJuego extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblnivel)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblnivel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,15 +439,15 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblnivel))
-                .addGap(144, 144, 144)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(50, 50, 50)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -496,7 +504,23 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSiguienteLvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteLvlActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            int niv = this.partida.nivel++;
+            Partida nueva = new Partida(niv);
+            this.usuario.setPartida(nueva);
+            GUIJuego juego = new GUIJuego(nueva, this.bd, this.usuario);
+            bd.guardar();
+            lblnivel.repaint();
+            juego.setVisible(true);
+            this.dispose();
+            
+            System.out.println("Siguiente partida---------------");
+        } catch (IOException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSiguienteLvlActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

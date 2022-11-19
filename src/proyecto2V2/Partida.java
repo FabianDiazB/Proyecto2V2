@@ -129,14 +129,12 @@ public class Partida implements Serializable{
                 
                 field.setSize(50, 50);
                 field.setLocation(i*50, j*50);
-                //field.setb;
                 field.setTransferHandler(new TransferHandler("text"));
                 MouseListener listener = new Partida.DragMouseAdapt();
                 field.addMouseListener(listener);
                 field.setBorder(border);
                 panel.add(field);
                 matriz[i][j] = field;
-               // field.pare+
             }
         }
         return matriz;

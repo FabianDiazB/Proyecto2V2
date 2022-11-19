@@ -42,12 +42,14 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="cmbAtaque" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtVida" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                          <Component id="txtNivel" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="txtEspacio" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
                           <Component id="txtImgAtaque" pref="190" max="32767" attributes="0"/>
                           <Component id="txtImgSkin" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtAtaque" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtNombre" alignment="0" pref="132" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txtNivel" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="txtEspacio" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">

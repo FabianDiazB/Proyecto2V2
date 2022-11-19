@@ -93,31 +93,35 @@ public class GUIUsuario extends javax.swing.JFrame {
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnCargar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(134, 134, 134)
+                        .addComponent(btnNueva))
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addGap(115, 115, 115)
                         .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnNueva)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                        .addComponent(btnSalir)
-                        .addGap(48, 48, 48))))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnCargar)
+                                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                                        .addComponent(btnSalir)
+                                        .addGap(15, 15, 15)))
+                                .addGap(28, 28, 28)))))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(86, 86, 86)
+                .addComponent(btnNueva)
+                .addGap(40, 40, 40)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNueva)
-                    .addComponent(btnSalir))
                 .addGap(18, 18, 18)
                 .addComponent(btnCargar)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(btnSalir)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,7 +151,7 @@ public class GUIUsuario extends javax.swing.JFrame {
         user.setPartida(nueva);
         System.out.println("Partida añadida");
         try {
-            GUIJuego nuevoJ = new GUIJuego(nueva,bd);
+            GUIJuego nuevoJ = new GUIJuego(nueva,bd,user);
             System.out.println("Nuevo juego creado");
             nuevoJ.setVisible(true);
             bd.guardar();
@@ -173,7 +177,7 @@ public class GUIUsuario extends javax.swing.JFrame {
             // TODO add your handling code here:
             int index = jComboBox1.getSelectedIndex();
             Partida p = user.getPartidas().get(index);
-            GUIJuego juego = new GUIJuego(p,bd);
+            GUIJuego juego = new GUIJuego(p,bd,user);
             juego.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(GUIUsuario.class.getName()).log(Level.SEVERE, null, ex);
