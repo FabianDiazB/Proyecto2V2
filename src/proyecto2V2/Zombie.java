@@ -64,7 +64,8 @@ public abstract class Zombie extends Thread implements Serializable{
         if(arma.getVida()<=0){
             arma.setVivo(false);
             arma.getLabelA().setText("");
-            armas.remove(arma);
+            arma.getLabelA().setVisible(false);
+           // armas.remove(arma);
             this.caminando=true;
             return;
             

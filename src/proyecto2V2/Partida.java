@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -130,6 +132,7 @@ public class Partida implements Serializable{
                 field.setSize(50, 50);
                 field.setLocation(i*50, j*50);
                 field.setTransferHandler(new TransferHandler("text"));
+                //field.setTransferHandler(new TransferHandler("icon"));
                 MouseListener listener = new Partida.DragMouseAdapt();
                 field.addMouseListener(listener);
                 field.setBorder(border);

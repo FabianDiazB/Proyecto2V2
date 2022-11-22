@@ -131,6 +131,7 @@ public class GUIJuego extends javax.swing.JFrame {
             label.setSize(50, 50);
             label.setLocation(150+(60*posX++), 15);
             label.setTransferHandler(new TransferHandler("text"));
+            //label.setTransferHandler(new TransferHandler("icon"));
             MouseListener listener1 = new DragMouseAdapter();
             label.addMouseListener(listener1);
             label.setVerticalTextPosition(JLabel.BOTTOM);
@@ -138,10 +139,20 @@ public class GUIJuego extends javax.swing.JFrame {
        }  
         
     }    
-    
+
+//    Thread t = new Thread(new Runnable (){
+//        @Override
+//        public void run(){
+//            pbvida.setValue();
+//        }
+//    });
         
     private class DragMouseAdapter extends MouseAdapter {
-        
+        public void mouseEntered(MouseEvent e){
+            JComponent c = (JComponent) e.getSource();
+            JLabel objeto = (JLabel) c;
+            lblnombre.setText(objeto.getText());
+        }
         
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
@@ -161,6 +172,7 @@ public class GUIJuego extends javax.swing.JFrame {
                 partida.reliquia.getReliquia().setEnabled(false);
             }
         }
+        
     }
     private class Borrar extends MouseAdapter {
             public void mouseClicked(MouseEvent e) {
@@ -206,6 +218,7 @@ public class GUIJuego extends javax.swing.JFrame {
                                     ArmaLargoAlcance nuevo4 = new ArmaLargoAlcance(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
                                     nuevo4.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
                                     nuevo4.setLabelA(matriz[i][j]);
+                                    //nuevo4.
                                     partida.aDesplegados.add(nuevo4);
                                     break;
                                 
@@ -225,11 +238,13 @@ public class GUIJuego extends javax.swing.JFrame {
         }
         
         for(Zombie z: this.partida.zDesplegados){
-            System.out.println("\nZombie desplegado:");
-            System.out.println(z.toString());
+           //System.out.println("\nZombie desplegado:");
+           //System.out.println(z.toString());
             JLabel nuevo = new JLabel(z.getNombre());
             nuevo.setSize(50,50);
             nuevo.setLocation(z.getX(),z.getY());
+            //MouseListener listener2 = new HoverMouseAdapter();
+           // nuevo.addMouseListener(listener2);
             z.setReliquia(this.partida.getReliquia());
             z.setLabelZ(nuevo);
             panelMapa.add(nuevo);
@@ -294,8 +309,8 @@ public class GUIJuego extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnSiguienteLvl = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
+        pbvida = new javax.swing.JProgressBar();
+        lblnombre = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblnivel = new javax.swing.JLabel();
@@ -371,7 +386,7 @@ public class GUIJuego extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nombre");
+        lblnombre.setText("Nombre");
 
         jLabel3.setText("_________________________");
 
@@ -417,8 +432,8 @@ public class GUIJuego extends javax.swing.JFrame {
                     .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
+                            .addComponent(pbvida, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblnombre)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
@@ -430,9 +445,9 @@ public class GUIJuego extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pbvida, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblnombre)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -536,6 +551,15 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+        guardarCoordenadas();
+        partida.asignarReliquia();
+        try {
+            this.bd.guardar();
+            JOptionPane.showMessageDialog(this, "Partida guardada","SAVE",JOptionPane.DEFAULT_OPTION);
+            this.partida.toStringZombies();
+        } catch (IOException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ejecutarThreads();
         panelBarra.setVisible(false);
 
@@ -584,13 +608,13 @@ public class GUIJuego extends javax.swing.JFrame {
     private javax.swing.JButton btnPrueba;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSiguienteLvl;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel lblnivel;
+    private javax.swing.JLabel lblnombre;
     private javax.swing.JPanel panelBarra;
     private javax.swing.JPanel panelMapa;
+    private javax.swing.JProgressBar pbvida;
     // End of variables declaration//GEN-END:variables
 }
