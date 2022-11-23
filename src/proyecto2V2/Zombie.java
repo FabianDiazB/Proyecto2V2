@@ -50,22 +50,25 @@ public abstract class Zombie extends Thread implements Serializable{
     
     public void atacar(Arma arma) throws InterruptedException{
         
-        while(this.vida>=0 && arma.getVida()>=0){
+        while(this.vida>0 && arma.getVida()>=0){
             arma.setVida(arma.getVida()-this.damage);
+            this.caminando=false;
+            sleep(1000);
             System.out.println(this.getNombre()+" atacando a " +arma.getNombre()+arma.getVida());
             //this.addRegistroAtq(this, arma);
             //arma.addRegistroDmg(this, arma);
 
         }
-        if(this.vida<=0){
-            System.out.println(this.getNombre() +" ha muerto");
-            this.vivo=false;
-            this.ejecutando=false;
-            this.labelZ.setText("");
-            this.labelZ.setVisible(false);
-            this.interrupt();
-            return;
-        }
+//        if(this.vida<=0){
+//            System.out.println(this.getNombre() +" ha muerto");
+//            this.vivo=false;
+//            this.ejecutando=false;
+//            this.labelZ.setText("");
+//            this.labelZ.setVisible(false);
+//            this.caminando=false;
+//            //this.interrupt();
+//            return;
+//        }
         this.caminando=true;
         
     }    
@@ -248,7 +251,7 @@ public abstract class Zombie extends Thread implements Serializable{
     public void run(){
 
         while(ejecutando){
-            if(this.vivo){
+            if(this.vida>0){
                 if(this.caminando==true){
                     try {
                         mover();
@@ -260,14 +263,15 @@ public abstract class Zombie extends Thread implements Serializable{
                     //atacar aqui
                 }
             }
-            if(vivo==false){
+            else{
             this.labelZ.setText("");
             this.labelZ.setVisible(false);
+            this.caminando=false;
+            this.ejecutando=false;
+            this.interrupt();
                 System.out.println(this.nombre + " ha muerto");
-        }
+            }
     }
  }
-    
-    
-    
+  
 }

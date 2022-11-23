@@ -4,6 +4,8 @@
  */
 package proyecto2V2;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,6 +16,8 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -21,11 +25,17 @@ import java.util.logging.Logger;
  */
 public class GUICrear extends javax.swing.JFrame {
     BDBichos bdBichos = new BDBichos();
+    
+    private final JFileChooser openFileChooser;
+    private BufferedImage originalBI;
     /**
      * Creates new form GUIGeneral
      */
     public GUICrear() throws IOException, ClassNotFoundException {
         initComponents(); 
+        openFileChooser = new JFileChooser();
+        openFileChooser.setCurrentDirectory(new File("C:\\Users\\Sebas\\POO\\Proyecto2V2\\src\\imagenes"));
+        //openFileChooser.setFileFilter()
         this.restaurar();
         toStringBichos();
     }
@@ -141,6 +151,7 @@ public class GUICrear extends javax.swing.JFrame {
         txtAtaque = new javax.swing.JTextField();
         lvlNombre = new javax.swing.JLabel();
         btnAdd1 = new javax.swing.JButton();
+        btnFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,7 +169,7 @@ public class GUICrear extends javax.swing.JFrame {
 
         lblNivelAp.setText("Nivel de aparicion");
 
-        lblSkin.setText("Imagen Skin");
+        lblSkin.setText("Imagen");
 
         txtImgSkin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,14 +223,26 @@ public class GUICrear extends javax.swing.JFrame {
             }
         });
 
+        btnFile.setText("Cargar Imagen");
+        btnFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(btnAdd)
+                        .addGap(88, 88, 88)
+                        .addComponent(btnAdd1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lvlNombre)
@@ -232,21 +255,17 @@ public class GUICrear extends javax.swing.JFrame {
                             .addComponent(lvlAttack))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtVida, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtImgAtaque, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(txtImgSkin)
+                            .addComponent(txtImgAtaque)
                             .addComponent(txtAtaque)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(txtNombre)
+                            .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtImgSkin, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtNivel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                .addComponent(txtEspacio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(btnAdd)
-                        .addGap(88, 88, 88)
-                        .addComponent(btnAdd1)))
-                .addGap(139, 139, 139))
+                                .addComponent(btnFile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbAtaque, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,11 +300,13 @@ public class GUICrear extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSkin)
                     .addComponent(txtImgSkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFile)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAttackimg)
-                    .addComponent(txtImgAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                    .addComponent(txtImgAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAttackimg))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnAdd1))
@@ -337,6 +358,21 @@ public class GUICrear extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAtaqueActionPerformed
 
+    private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
+        int returnVal = openFileChooser.showOpenDialog(this);
+        if (returnVal== JFileChooser.APPROVE_OPTION){
+            try{
+                originalBI=ImageIO.read(openFileChooser.getSelectedFile());
+                txtImgSkin.setText(originalBI.toString());
+            }catch(IOException ioe){
+                txtImgSkin.setText("No se logro cargar la imagen");
+            }
+        }
+        else{
+            txtImgSkin.setText("No se eligio una imagen");
+        }   
+    }//GEN-LAST:event_btnFileActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -382,6 +418,7 @@ public class GUICrear extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAdd1;
+    private javax.swing.JButton btnFile;
     private javax.swing.JComboBox<String> cmbAtaque;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JLabel jLabel3;

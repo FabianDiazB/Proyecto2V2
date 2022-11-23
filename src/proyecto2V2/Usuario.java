@@ -22,6 +22,13 @@ public class Usuario implements Serializable {
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }
+    public void delPartida(Partida partida){
+        for (Partida p: this.partidas){
+            if(p.equals(partida)){
+                this.partidas.remove(p);
+            }
+        }
+    }
     
     public void setPartida(Partida partida){
         this.partidas.add(partida);

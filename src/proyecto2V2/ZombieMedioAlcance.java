@@ -45,7 +45,7 @@ public class ZombieMedioAlcance extends Zombie{
             return null;
         }
         for(Arma defensa: enemigos){
-            if(interseccion(defensa) && defensa.isVivo()) return defensa;
+            if(interseccion(defensa) && defensa.getVida()>0) return defensa;
         }
         return null;              
     }

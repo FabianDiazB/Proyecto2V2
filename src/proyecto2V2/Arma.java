@@ -6,6 +6,8 @@ package proyecto2V2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -44,14 +46,18 @@ public abstract class Arma extends Thread implements Serializable {
     public abstract Zombie detectar(ArrayList<Zombie> zombies);
     
     public void atacar(Zombie zombie) {
-        while(this.getVida()>0 && zombie.isVivo()){
+        while(this.getVida()>0 && zombie.getVida()>=0){
             zombie.setVida(zombie.getVida()-this.getDamage());
             System.out.println(this.getNombre()+" atacando a " +zombie.getNombre()+zombie.getVida());
-
-            //this.addRegistroAtq(zombie,this);
-            //zombie.addRegistroDmg(zombie, this);
-            this.setAtacando(true);
+            try {
+                sleep(1000);
+                //this.addRegistroAtq(zombie,this);
+                //zombie.addRegistroDmg(zombie, this);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Arma.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        this.atacando=false;
 
         return;
     }
@@ -63,9 +69,11 @@ public abstract class Arma extends Thread implements Serializable {
     public void addRegistroAtq(Zombie zombie, Arma arma){
         registroAtq.add(arma.getNombre() + " ataque por: " + arma.getDamage() + " a -> " + zombie.getNombre());
     }
+    
     public int getVida() {
         return vida;
     }
+    
     public void setAtacando(boolean s){
         this.atacando = s;
     }
@@ -89,7 +97,6 @@ public abstract class Arma extends Thread implements Serializable {
     public void setLabelA(JLabel labelA) {
         this.labelA = labelA;
     }
-
     
     public int getDamage() {
         return damage;
@@ -146,9 +153,7 @@ public abstract class Arma extends Thread implements Serializable {
 
     public void setZombies(ArrayList<Zombie> zombies) {
         this.zombies = zombies;
-    }
-    
-    
+    } 
     
     public void setCoordenadas(int x, int y){
         this.x = x;
@@ -166,21 +171,27 @@ public abstract class Arma extends Thread implements Serializable {
     
     
     public void run(){
-        while(this.vida>=0){
-            Zombie detectado = detectar(this.zombies);
-            if (detectado != null && atacando == false){
-                this.atacando = true;
-                atacar(detectado);
+        while(!interrupted()){
+            if(this.vida>0){
+                try {
+                    Zombie detectado = detectar(this.zombies);
+                    sleep(10);
+                    if (detectado != null && atacando == false){
+                        this.atacando = true;
+                        atacar(detectado);
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Arma.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
-        if(this.vida<=0){
-            System.out.println(this.getNombre() +" ha muerto");
-            this.setVivo(false);
-            this.labelA.setIcon(null);
-            this.labelA.setText("");
-            this.labelA.setVisible(false);
-            this.interrupt();
+            if(this.vida<=0){
+                System.out.println(this.getNombre() +" ha muerto");
+                this.setVivo(false);
+                this.labelA.setIcon(null);
+                this.labelA.setText("");
+                this.labelA.setVisible(false);
+                this.interrupt();
         }
     }
-    
+    }
 }

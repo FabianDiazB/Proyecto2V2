@@ -25,7 +25,7 @@ public class ArmaMedioAlcance extends Arma{
             return null;
         }
         for(Zombie z: zombies){
-            if(interseccion(z) && z.isVivo()) return z;
+            if(interseccion(z) && z.getVida()>0) return z;
         }
         return null; 
     }

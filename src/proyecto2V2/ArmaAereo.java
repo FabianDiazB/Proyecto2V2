@@ -24,7 +24,7 @@ public class ArmaAereo extends Arma{
             return null;
         }
         for(Zombie z: zombies){
-            if(interseccion(z) && z.getClass().getSimpleName().equals("ZombieAereo")&& z.isVivo()) return z;
+            if(interseccion(z) && z.getClass().getSimpleName().equals("ZombieAereo")&& z.getVida()>0) return z;
         }
         return null;  
     }
