@@ -263,6 +263,7 @@ public abstract class Zombie extends Thread implements Serializable{
             }
             if(vivo==false){
             this.labelZ.setText("");
+            this.labelZ.setVisible(false);
         }
     }
  }

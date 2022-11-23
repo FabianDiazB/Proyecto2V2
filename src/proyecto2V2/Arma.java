@@ -175,7 +175,6 @@ public abstract class Arma extends Thread implements Serializable {
             System.out.println(this.getNombre() +" ha muerto");
             this.setVivo(false);
             this.labelA.setIcon(null);
-            System.out.println("tiene que quitarse el label");
             this.labelA.setText("");
             this.labelA.setVisible(false);
             this.interrupt();
