@@ -47,30 +47,30 @@ public abstract class Zombie extends Thread implements Serializable{
     
     
     public abstract Arma detectar(ArrayList<Arma> armas);
-    public void atacar(Arma arma){
-        System.out.println(this.getNombre()+" atacando a" +arma.getNombre());
+    
+    public void atacar(Arma arma) throws InterruptedException{
+        System.out.println(this.getNombre()+" atacando a " +arma.getNombre());
         while(this.vida>0 && arma.getVida()>0){
+            sleep(10);
             arma.setVida(arma.getVida()-this.damage);
-            System.out.println(arma.getVida());
-            //this.addRegistroAtq(this,arma);
+           // System.out.println(arma.getVida());
+            //this.addRegistroAtq(this, arma);
             //arma.addRegistroDmg(this, arma);
+
         }
         if(this.vida<=0){
             System.out.println(this.getNombre() +" ha muerto");
-            this.vivo=(false);
+            this.vivo=false;
             this.ejecutando=false;
+            this.labelZ.setText("");
+            this.labelZ.setVisible(false);
+            this.interrupt();
             return;
         }
         if(arma.getVida()<=0){
-            arma.setVivo(false);
-            arma.getLabelA().setText("");
-            arma.getLabelA().setVisible(false);
-           // armas.remove(arma);
             this.caminando=true;
-            return;
-            
         }
-        //registro.add();
+
         
         
     }    
@@ -119,7 +119,7 @@ public abstract class Zombie extends Thread implements Serializable{
     
     
     public void ubicar(){
-        System.out.println("entrando al ubicaaaaar");
+        System.out.println("entrando al ubicar");
         int r = (int)(Math.random()*4+1);
         System.out.println(r);//int n = (int) (Math.random() * (1049 - 949)) + 949;
         switch (r) {
@@ -252,12 +252,7 @@ public abstract class Zombie extends Thread implements Serializable{
     @Override
     public void run(){
 
-        
-        ArmaContacto nueva =new ArmaContacto(reliquia.getVida(), 0, "Reliquia", "skin", "sin", 1, 0);
-        nueva.setCoordenadas(reliquia.getX(), reliquia.getY());
-        armas.add(nueva);
         while(ejecutando){
-            //System.out.println("("+this.x+","+this.y+")");
             if(this.vida>0){
                 if(this.caminando==true){
                     try {
@@ -272,7 +267,7 @@ public abstract class Zombie extends Thread implements Serializable{
             }
             if(vivo==false){
             this.labelZ.setText("");
-            System.out.println(this.nombre + "ha muerto");
+           // System.out.println(this.nombre + "ha muerto");
         }
     }
  }

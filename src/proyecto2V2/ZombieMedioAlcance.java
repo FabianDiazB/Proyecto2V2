@@ -16,12 +16,6 @@ public class ZombieMedioAlcance extends Zombie{
     public ZombieMedioAlcance(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         super(vida, damage, nombre, skin, disparo, lvlAparicion, espacio);
     }
-
-   
-   
-
-
- 
   
    public boolean interseccion(Arma defensa){
             int tw = 100;

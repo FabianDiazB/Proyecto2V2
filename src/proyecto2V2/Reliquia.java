@@ -21,7 +21,7 @@ public class Reliquia implements Serializable {
 
     }
 
-    public JLabel getReliquia() {
+    public JLabel getLabelA() {
         return reliquia;
     }
 

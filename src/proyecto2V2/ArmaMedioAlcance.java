@@ -29,12 +29,13 @@ public class ArmaMedioAlcance extends Arma{
         if(this.getVida()<=0){
             System.out.println(this.getNombre() +" ha muerto");
             this.setVivo(false);
+            this.labelA.setText("");
+            this.labelA.setVisible(false);
+            this.interrupt();
             return;
         }
         if(zombie.getVida()<=0){
-            zombie.setVivo(false);
-            this.zombies.remove(zombie);
-            zombie.getLabelZ().setText("");
+            this.setAtacando(false);
             return;
         } 
     }

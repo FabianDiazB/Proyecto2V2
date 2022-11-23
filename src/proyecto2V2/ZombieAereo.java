@@ -12,24 +12,18 @@ import java.util.ArrayList;
  */
 public class ZombieAereo extends Zombie{
 
- 
-
    
     public ZombieAereo(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         super(vida, damage, nombre, skin, disparo, lvlAparicion, espacio);
     }
 
-    
-    
-    
-
    
    public boolean interseccion(Arma defensa){
         
-            int tw = 0;
-            int th = 0;
-            int rw = 0;
-            int rh = 0;
+            int tw = 50;
+            int th = 50;
+            int rw = 50;
+            int rh = 50;
             if(rw<=0 || rh <=0 || tw<=0 || th <= 0){
                 return false;
             }
@@ -54,7 +48,7 @@ public class ZombieAereo extends Zombie{
         }
         for(Arma defensa: enemigos){
             if(interseccion(defensa) && defensa.isVivo()){
-                System.out.println("ha detectado arma");
+
                 return defensa;
             }
         }

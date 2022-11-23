@@ -15,13 +15,6 @@ public class ZombieContacto extends Zombie{
     public ZombieContacto(int vida, int damage, String nombre, String skin, String disparo, int lvlAparicion, int espacio) {
         super(vida, damage, nombre, skin, disparo, lvlAparicion, espacio);
     }
-
-    
-
-   
-    
-    
-
   
    public boolean interseccion(Arma defensa){
 

@@ -42,11 +42,13 @@ public class Partida implements Serializable{
     ArrayList<Arma> aDesplegados = new ArrayList<Arma>();
     
    
-    
+    //new Thread t = new (Runnable(){
+        
+   // });
     
     public Partida(int lvl){
         this.nivel = lvl; 
-        this.cantidadZombies =2;//5 + this.nivel*3;
+        this.cantidadZombies =3;//5 + this.nivel*3;
         this.reliquia = new Reliquia(20);
         if(this.nivel==1){
             this.espacioDisponible=15;
@@ -63,23 +65,23 @@ public class Partida implements Serializable{
                         if(bicho.getTipo().equals("Zombie")){
                             switch(bicho.getTipoAtaque()){
                                 case "Aereo":
-                                ZombieAereo zombie = new ZombieAereo((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                                ZombieAereo zombie = new ZombieAereo((int)bicho.getVida()+(2*nivel),(int)bicho.getDamage()+nivel+1,bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 this.zombies.add(zombie);
                                 break;
                                 
                                 case "Medio alcance":
-                                ZombieMedioAlcance zombie1 = new ZombieMedioAlcance((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                                ZombieMedioAlcance zombie1 = new ZombieMedioAlcance((int)bicho.getVida()+(nivel*2),(int)bicho.getDamage()+nivel+1,bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 this.zombies.add(zombie1);
                                 break;
                                 
                                 case "Contacto":
-                                ZombieContacto zombie2 = new ZombieContacto((int)bicho.getVida(),(int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
+                                ZombieContacto zombie2 = new ZombieContacto((int)bicho.getVida()+(nivel*2),(int)bicho.getDamage()+1+nivel,bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 this.zombies.add(zombie2);
                                 break;
                                 
                                 case "Largo alcance":
-                                ZombieLargoAlcance zombie3 = new ZombieLargoAlcance((int)bicho.getVida(),
-                                        (int)bicho.getDamage(),bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),
+                                ZombieLargoAlcance zombie3 = new ZombieLargoAlcance((int)bicho.getVida()+(nivel*2),
+                                        (int)bicho.getDamage()+nivel+1,bicho.getNombre(),bicho.getImagenAtaque(),bicho.getImagenDisparo(),
                                         (int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                                 this.zombies.add(zombie3);
                                 break;
@@ -108,6 +110,7 @@ public class Partida implements Serializable{
                                     bicho.getImagenAtaque(),bicho.getImagenDisparo(),(int)bicho.getLvlAparicion(),(int)bicho.getEspacio());
                             this.armas.add(arma3);
                             break;
+                        
                             }
                         }
                     }
@@ -147,9 +150,9 @@ public class Partida implements Serializable{
                 z.setArmas(this.aDesplegados);
                 z.setReliquia(this.reliquia);
             }
-            for (Arma a : armas){
-                a.setZombies(this.zDesplegados);
-                }
+        for (Arma a : armas){
+            a.setZombies(this.zDesplegados);
+        }
     }
 
     public int getEspacioDisponible() {
@@ -184,6 +187,8 @@ public class Partida implements Serializable{
                                         (int)zR.getDamage(),zR.getNombre(),zR.getSkin(),zR.getDisparo(),
                                         (int)zR.getLvlAparicion(),(int)zR.getEspacio()); 
                     nuevo.ubicar();
+                    
+                    //nuevo.setLabelZ();
                     
                     this.zDesplegados.add(nuevo);                    
                     break;
@@ -222,7 +227,7 @@ public class Partida implements Serializable{
             JComponent c = (JComponent) e.getSource();
             JLabel l = (JLabel)c;
             if(l.getText().equals("Reliquia")){
-                reliquia.getReliquia().setEnabled(true);
+                reliquia.getLabelA().setEnabled(true);
             }
             l.setText("");
             l.setIcon(null);

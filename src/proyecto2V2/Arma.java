@@ -156,12 +156,13 @@ public abstract class Arma extends Thread implements Serializable {
     public void run(){
         while(this.vida>=0){
             Zombie detectado = detectar(this.zombies);
-            if (detectado!= null && atacando == false){
+            if (detectado != null && atacando == false){
                 this.atacando = true;
                 atacar(detectado);
             }
         }
         if(this.vida<=0){
+            System.out.println(this.labelA.getText());
             this.labelA.setText("");
             System.out.println(this.nombre + "ha muerto");
         }

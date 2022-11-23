@@ -140,12 +140,6 @@ public class GUIJuego extends javax.swing.JFrame {
         
     }    
 
-//    Thread t = new Thread(new Runnable (){
-//        @Override
-//        public void run(){
-//            pbvida.setValue();
-//        }
-//    });
         
     private class DragMouseAdapter extends MouseAdapter {
         public void mouseEntered(MouseEvent e){
@@ -157,7 +151,7 @@ public class GUIJuego extends javax.swing.JFrame {
         public void mousePressed(MouseEvent e) {
             JComponent c = (JComponent) e.getSource();
             JLabel objeto = (JLabel) c;
-            if(objeto.getText().equals("Reliquia") && partida.reliquia.getReliquia().isEnabled()){
+            if(objeto.getText().equals("Reliquia") && partida.reliquia.getLabelA().isEnabled()){
                 TransferHandler handler = c.getTransferHandler();
                 handler.exportAsDrag(c, e, TransferHandler.COPY);
             }else{
@@ -169,7 +163,7 @@ public class GUIJuego extends javax.swing.JFrame {
                 }
             }
             if(objeto.getText().equals("Reliquia")){
-                partida.reliquia.getReliquia().setEnabled(false);
+                partida.reliquia.getLabelA().setEnabled(false);
             }
         }
         
@@ -186,7 +180,7 @@ public class GUIJuego extends javax.swing.JFrame {
     }
     
 
-    public void ejecutarThreads(){
+    public void ejecutarThreads(){ 
         for (int i = 0; i<22; i++){
             for (int j = 0; j<13; j++){
                 String textoLbl =this.matriz[i][j].getText();
@@ -194,9 +188,8 @@ public class GUIJuego extends javax.swing.JFrame {
                     for(Arma defensa: partida.getArmas()){
                         if(textoLbl.equals(defensa.getNombre())){
                             String tipoDefensa = defensa.getClass().getSimpleName();
-                            System.out.println(tipoDefensa);
                             switch (tipoDefensa) {
-                                case "ArmaContaco":
+                                case "ArmaContacto":
                                     ArmaContacto nuevo = new ArmaContacto(defensa.getVida(),defensa.getDamage(),defensa.getNombre(),defensa.getSkin(),defensa.getDisparo(),defensa.getLvlAparicion(),defensa.getEspacio());
                                     nuevo.setCoordenadas(matriz[i][j].getX(), matriz[i][j].getY());
                                     nuevo.setLabelA(matriz[i][j]);
@@ -220,8 +213,8 @@ public class GUIJuego extends javax.swing.JFrame {
                                     nuevo4.setLabelA(matriz[i][j]);
                                     //nuevo4.
                                     partida.aDesplegados.add(nuevo4);
-                                    break;
-                                
+                                    break;                                    
+
                             }
                         }
                     }
@@ -231,7 +224,9 @@ public class GUIJuego extends javax.swing.JFrame {
                 
             }
         }
-
+        
+        
+        
         for(Arma a: partida.aDesplegados){
             a.setZombies(partida.zDesplegados);
             a.start();
@@ -240,11 +235,13 @@ public class GUIJuego extends javax.swing.JFrame {
         for(Zombie z: this.partida.zDesplegados){
            //System.out.println("\nZombie desplegado:");
            //System.out.println(z.toString());
+           
+           //z.getLabelZ().setVisible(true);
+            
             JLabel nuevo = new JLabel(z.getNombre());
             nuevo.setSize(50,50);
             nuevo.setLocation(z.getX(),z.getY());
-            //MouseListener listener2 = new HoverMouseAdapter();
-           // nuevo.addMouseListener(listener2);
+
             z.setReliquia(this.partida.getReliquia());
             z.setLabelZ(nuevo);
             panelMapa.add(nuevo);
@@ -252,6 +249,8 @@ public class GUIJuego extends javax.swing.JFrame {
             z.setArmas(partida.aDesplegados);
             z.start();
         }
+        
+
     }
     
     public void pruebazombi(){
@@ -285,14 +284,20 @@ public class GUIJuego extends javax.swing.JFrame {
     }
     
     public void guardarCoordenadas(){
+        
         for (int i = 0; i<22; i++){
             for (int j = 0; j<13; j++){
                 if(matriz[i][j].getText().equals("Reliquia")){
                     matriz[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2V2/reli.png")));
-                    System.out.println(matriz[i][j].getX());
-                    System.out.println(matriz[i][j].getY());
                     partida.reliquia.setX(matriz[i][j].getX());
                     partida.reliquia.setY(matriz[i][j].getY());
+                    
+                    ArmaContacto nueva = new ArmaContacto(partida.reliquia.getVida(), 0, "Reliquia", "skin", "sin", 1, 0);
+                    nueva.setCoordenadas(partida.reliquia.getX(), partida.reliquia.getY());
+                    nueva.setLabelA(matriz[i][j]);
+                    partida.aDesplegados.add(nueva);
+
+                   // partida.
                     return;
                 }
                 
@@ -495,14 +500,14 @@ public class GUIJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_barraImagenesActionPerformed
 
     private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
-        btnGuardar.setBackground(Color.WHITE);
-        btnGuardar.setForeground(Color.BLACK);
+      //  btnGuardar.setBackground(Color.WHITE);
+      //  btnGuardar.setForeground(Color.BLACK);
     }//GEN-LAST:event_btnGuardarMouseEntered
 
     private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
         // TODO add your handling code here:
-        btnGuardar.setBackground(new java.awt.Color(255,0,51));
-        btnGuardar.setForeground(Color.white);
+      //  btnGuardar.setBackground(new java.awt.Color(255,0,51));
+        //btnGuardar.setForeground(Color.white);
     }//GEN-LAST:event_btnGuardarMouseExited
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -564,6 +569,29 @@ public class GUIJuego extends javax.swing.JFrame {
         panelBarra.setVisible(false);
 
         this.iniciada=true;
+        
+        Thread t;
+        t = new Thread(new Runnable (){
+            @Override
+            public void run(){
+                boolean muertos = true;
+                while(partida.aDesplegados.get(0).isVivo()){
+                   for (Zombie z: partida.zDesplegados){
+                     if(z.getVida()>0){
+                         muertos = false; 
+                         break;}
+                   }
+                   if (muertos){
+                       JOptionPane.showMessageDialog(rootPane, "Nivel completado","Eso papi", JOptionPane.YES_NO_OPTION);
+                   }
+                   else{
+                       continue;
+                   }
+                }
+                //if (partida.reliquia.getVida()>)
+            }
+        });
+        t.start();
     }//GEN-LAST:event_btnPruebaActionPerformed
 
     /**
