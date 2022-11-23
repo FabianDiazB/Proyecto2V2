@@ -127,8 +127,8 @@ public class Partida implements Serializable{
     }
     public JLabel[][] generateSlots(JPanel panel){
         JLabel bg = new JLabel(new ImageIcon("C:\\Users\\Sebas\\POO\\Proyecto2V2\\src\\imagenes\\background.png"));
-        //bg.setSize(1136,650);
-        //panel.add(bg);
+        bg.setSize(1100,650);
+        panel.add(bg);
         matriz =  new JLabel[22][13];
         Border border = LineBorder.createGrayLineBorder();
         for (int i = 0; i < 22; i++){

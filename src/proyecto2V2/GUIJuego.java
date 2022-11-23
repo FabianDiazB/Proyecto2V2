@@ -343,7 +343,7 @@ public class GUIJuego extends javax.swing.JFrame {
         );
         panelMapaLayout.setVerticalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         panelBarra.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -458,7 +458,7 @@ public class GUIJuego extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblnivel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                 .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,9 +485,9 @@ public class GUIJuego extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelMapa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelMapa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelBarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -526,14 +526,14 @@ public class GUIJuego extends javax.swing.JFrame {
     private void btnSiguienteLvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteLvlActionPerformed
         try {
             // TODO add your handling code here:
-            int niv = this.partida.nivel++;
-            Partida nueva = new Partida(niv);
+            Partida nueva = new Partida(this.partida.getNivel()+1);
             this.usuario.setPartida(nueva);
             GUIJuego juego = new GUIJuego(nueva, this.bd, this.usuario);
             bd.guardar();
             lblnivel.repaint();
             juego.setVisible(true);
             this.dispose();
+            this.usuario.delPartida(partida);
             
             System.out.println("Siguiente partida---------------");
         } catch (IOException ex) {
@@ -575,7 +575,7 @@ public class GUIJuego extends javax.swing.JFrame {
             @Override
             public void run(){
                 System.out.println("iniciando thread de gui");
-                while(partida.aDesplegados.get(0).isVivo()){
+                while(partida.aDesplegados.get(0).getVida()>0){
                    boolean muertos = true;
                    for (Zombie z: partida.zDesplegados){
                      if(z.getVida()>0){
@@ -585,16 +585,17 @@ public class GUIJuego extends javax.swing.JFrame {
                    if (muertos){
                        System.out.println("todos estan muertos");
                        JOptionPane.showMessageDialog(rootPane, "Nivel completado","Eso papi", JOptionPane.YES_NO_OPTION);
+                       Thread.interrupted();
                        return;
                    }
                    else{
-                       System.out.println("siguen vivos");
+                       //System.out.println("siguen vivos");
                        continue;
                    }
                 }
-                if (!(partida.aDesplegados.get(0).isVivo())){
+                if (!(partida.aDesplegados.get(0).getVida()>0)){
                     JOptionPane.showMessageDialog(rootPane, "Ya perdió papis, va pa atrás","MAMEI", JOptionPane.OK_OPTION);
-                    dispose();
+                    //dispose();
                 }
             }
         });
