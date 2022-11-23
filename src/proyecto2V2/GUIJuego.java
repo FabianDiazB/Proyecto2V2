@@ -511,6 +511,7 @@ public class GUIJuego extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guardarCoordenadas();
+        System.out.println(partida.aDesplegados.get(0).getNombre());
         partida.asignarReliquia();
         try {
             this.bd.guardar();
@@ -573,21 +574,28 @@ public class GUIJuego extends javax.swing.JFrame {
         t = new Thread(new Runnable (){
             @Override
             public void run(){
-                boolean muertos = true;
+                System.out.println("iniciando thread de gui");
                 while(partida.aDesplegados.get(0).isVivo()){
+                   boolean muertos = true;
                    for (Zombie z: partida.zDesplegados){
                      if(z.getVida()>0){
                          muertos = false; 
                          break;}
                    }
                    if (muertos){
+                       System.out.println("todos estan muertos");
                        JOptionPane.showMessageDialog(rootPane, "Nivel completado","Eso papi", JOptionPane.YES_NO_OPTION);
+                       return;
                    }
                    else{
+                       System.out.println("siguen vivos");
                        continue;
                    }
                 }
-                //if (partida.reliquia.getVida()>)
+                if (!(partida.aDesplegados.get(0).isVivo())){
+                    JOptionPane.showMessageDialog(rootPane, "Ya perdió papis, va pa atrás","MAMEI", JOptionPane.OK_OPTION);
+                    dispose();
+                }
             }
         });
         t.start();

@@ -46,6 +46,8 @@ public abstract class Arma extends Thread implements Serializable {
     public void atacar(Zombie zombie) {
         while(this.getVida()>0 && zombie.isVivo()){
             zombie.setVida(zombie.getVida()-this.getDamage());
+            System.out.println(this.getNombre()+" atacando a " +zombie.getNombre()+zombie.getVida());
+
             //this.addRegistroAtq(zombie,this);
             //zombie.addRegistroDmg(zombie, this);
             this.setAtacando(true);
