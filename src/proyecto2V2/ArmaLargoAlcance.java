@@ -17,28 +17,6 @@ public class ArmaLargoAlcance extends Arma{
     }
     
     
-
-    @Override
-    public void atacar(Zombie zombie) {
-        while(this.getVida()>0 && zombie.isVivo()){
-            zombie.setVida(zombie.getVida()-this.getDamage());
-            //this.addRegistroAtq(zombie,this);
-            //zombie.addRegistroDmg(zombie, this);
-            this.setAtacando(true);
-        }
-        if(this.getVida()<=0){
-            System.out.println(this.getNombre() +" ha muerto");
-            this.setVivo(false);
-            this.labelA.setText("");
-            this.labelA.setVisible(false);
-            this.interrupt();
-            return;
-        }
-        if(zombie.getVida()<=0){
-            this.setAtacando(false);
-            return;
-        } 
-    }
     @Override
     public Zombie detectar(ArrayList<Zombie> zombies) {
         if(zombies==null){

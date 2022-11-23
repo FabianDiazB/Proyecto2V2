@@ -50,7 +50,7 @@ public abstract class Zombie extends Thread implements Serializable{
     
     public void atacar(Arma arma) throws InterruptedException{
         
-        while(this.vida>0 && arma.getVida()>0){
+        while(this.vida>0 && arma.getVida()>=0){
             sleep(10);
             arma.setVida(arma.getVida()-this.damage);
             System.out.println(this.getNombre()+" atacando a " +arma.getNombre()+arma.getVida());
@@ -67,11 +67,7 @@ public abstract class Zombie extends Thread implements Serializable{
             this.interrupt();
             return;
         }
-        if(arma.getVida()<=0){
-            this.caminando=true;
-        }
-
-        
+        this.caminando=true;
         
     }    
     
@@ -267,7 +263,6 @@ public abstract class Zombie extends Thread implements Serializable{
             }
             if(vivo==false){
             this.labelZ.setText("");
-           // System.out.println(this.nombre + "ha muerto");
         }
     }
  }

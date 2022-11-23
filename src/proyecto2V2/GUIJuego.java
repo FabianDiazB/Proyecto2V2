@@ -291,7 +291,6 @@ public class GUIJuego extends javax.swing.JFrame {
                     matriz[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2V2/reli.png")));
                     partida.reliquia.setX(matriz[i][j].getX());
                     partida.reliquia.setY(matriz[i][j].getY());
-                    
                     ArmaContacto nueva = new ArmaContacto(partida.reliquia.getVida(), 0, "Reliquia", "skin", "sin", 1, 0);
                     nueva.setCoordenadas(partida.reliquia.getX(), partida.reliquia.getY());
                     nueva.setLabelA(matriz[i][j]);

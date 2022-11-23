@@ -42,7 +42,17 @@ public abstract class Arma extends Thread implements Serializable {
     
     
     public abstract Zombie detectar(ArrayList<Zombie> zombies);
-    public abstract void atacar(Zombie zombie);
+    
+    public void atacar(Zombie zombie) {
+        while(this.getVida()>0 && zombie.isVivo()){
+            zombie.setVida(zombie.getVida()-this.getDamage());
+            //this.addRegistroAtq(zombie,this);
+            //zombie.addRegistroDmg(zombie, this);
+            this.setAtacando(true);
+        }
+
+        return;
+    }
         
     public void addRegistroDmg(Zombie zombie, Arma arma){
         registroAtq.add(arma.getNombre() + " recibio un golpe por: " + zombie.getDamage() + " de <- " + zombie.getNombre());
@@ -162,9 +172,13 @@ public abstract class Arma extends Thread implements Serializable {
             }
         }
         if(this.vida<=0){
-            System.out.println(this.labelA.getText());
+            System.out.println(this.getNombre() +" ha muerto");
+            this.setVivo(false);
+            this.labelA.setIcon(null);
+            System.out.println("tiene que quitarse el label");
             this.labelA.setText("");
-            System.out.println(this.nombre + "ha muerto");
+            this.labelA.setVisible(false);
+            this.interrupt();
         }
     }
     

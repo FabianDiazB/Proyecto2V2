@@ -47,8 +47,7 @@ public class ZombieAereo extends Zombie{
             return null;
         }
         for(Arma defensa: enemigos){
-            if(interseccion(defensa) && defensa.isVivo()){
-
+            if(interseccion(defensa) && defensa.getVida()>0){
                 return defensa;
             }
         }
