@@ -49,11 +49,11 @@ public abstract class Zombie extends Thread implements Serializable{
     public abstract Arma detectar(ArrayList<Arma> armas);
     
     public void atacar(Arma arma) throws InterruptedException{
-        System.out.println(this.getNombre()+" atacando a " +arma.getNombre());
+        
         while(this.vida>0 && arma.getVida()>0){
             sleep(10);
             arma.setVida(arma.getVida()-this.damage);
-           // System.out.println(arma.getVida());
+            System.out.println(this.getNombre()+" atacando a " +arma.getNombre()+arma.getVida());
             //this.addRegistroAtq(this, arma);
             //arma.addRegistroDmg(this, arma);
 
