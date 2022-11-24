@@ -51,8 +51,8 @@ public abstract class Arma extends Thread implements Serializable {
             System.out.println(this.getNombre()+" atacando a " +zombie.getNombre()+zombie.getVida());
             try {
                 sleep(1000);
-                //this.addRegistroAtq(zombie,this);
-                //zombie.addRegistroDmg(zombie, this);
+                this.addRegistroAtq(zombie,this);
+                zombie.addRegistroDmg(zombie, this);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Arma.class.getName()).log(Level.SEVERE, null, ex);
             }

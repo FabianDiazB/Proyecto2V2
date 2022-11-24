@@ -125,10 +125,7 @@ public class Partida implements Serializable{
             System.out.println("Fichero bichos no encontrado");
         }
     }
-    public JLabel[][] generateSlots(JPanel panel){
-        JLabel bg = new JLabel(new ImageIcon("C:\\Users\\Sebas\\POO\\Proyecto2V2\\src\\imagenes\\background.png"));
-        bg.setSize(1100,650);
-        panel.add(bg);
+    public JLabel[][] generateSlots(JPanel panel,JLabel bg){
         matriz =  new JLabel[22][13];
         Border border = LineBorder.createGrayLineBorder();
         for (int i = 0; i < 22; i++){
@@ -142,7 +139,8 @@ public class Partida implements Serializable{
                 MouseListener listener = new Partida.DragMouseAdapt();
                 field.addMouseListener(listener);
                 field.setBorder(border);
-                panel.add(field);
+                bg.add(field);
+                //panel.add(field);
                 matriz[i][j] = field;
             }
         }

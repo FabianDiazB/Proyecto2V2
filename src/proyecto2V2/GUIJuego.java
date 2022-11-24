@@ -26,6 +26,7 @@ import java.awt.event.MouseListener;
 import static java.lang.Thread.sleep;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,6 +67,9 @@ public class GUIJuego extends javax.swing.JFrame {
         System.out.println("base añadida");
         this.lblnivel.repaint();
         this.lblnivel.setText(""+p.getNivel());
+        bg = new JLabel(new ImageIcon("C:\\Users\\Sebas\\POO\\Proyecto2V2\\src\\imagenes\\background.png"));
+        bg.setSize(1100,650);
+        panelMapa.add(bg);
         if(iniciada){
             //restaurarArmas();
             //generateReli();
@@ -77,7 +81,7 @@ public class GUIJuego extends javax.swing.JFrame {
         }else{
             generateTextFields();
             if(this.partida.getMatriz() == null){
-                this.matriz = this.partida.generateSlots(this.panelMapa); 
+                this.matriz = this.partida.generateSlots(this.panelMapa, this.bg); 
                 //generateTextFields();
                 generateReli();
 
@@ -98,7 +102,7 @@ public class GUIJuego extends javax.swing.JFrame {
     public void dibujar(){
         for(int i=0;i<22;i++){
             for(int j=0;j<13;j++){
-                panelMapa.add(this.matriz[i][j]);
+                bg.add(this.matriz[i][j]);
             }
         }
 
@@ -244,7 +248,7 @@ public class GUIJuego extends javax.swing.JFrame {
 
             z.setReliquia(this.partida.getReliquia());
             z.setLabelZ(nuevo);
-            panelMapa.add(nuevo);
+            bg.add(nuevo);
             nuevo.setVisible(true);
             z.setArmas(partida.aDesplegados);
             z.start();
@@ -253,20 +257,20 @@ public class GUIJuego extends javax.swing.JFrame {
 
     }
     
-    public void pruebazombi(){
-        System.out.println("creando zombie prueba");
-        ZombieAereo z = new ZombieAereo(3, 3, "PRUEBA", "a", "b", 1, 3);
-        z.ubicar();
-        z.setReliquia(this.partida.getReliquia());
-        JLabel nuevo = new JLabel(z.getNombre());
-        nuevo.setSize(50,50);
-        nuevo.setLocation(z.getX(), z.getY());
-        panelMapa.add(nuevo);
-        revalidate();
-        z.setLabelZ(nuevo);
-        partida.zombies.add(z);
-        z.start();
-    }
+//    public void pruebazombi(){
+//        System.out.println("creando zombie prueba");
+//        ZombieAereo z = new ZombieAereo(3, 3, "PRUEBA", "a", "b", 1, 3);
+//        z.ubicar();
+//        z.setReliquia(this.partida.getReliquia());
+//        JLabel nuevo = new JLabel(z.getNombre());
+//        nuevo.setSize(50,50);
+//        nuevo.setLocation(z.getX(), z.getY());
+//        panelMapa.add(nuevo);
+//        revalidate();
+//        z.setLabelZ(nuevo);
+//        partida.zombies.add(z);
+//        z.start();
+//    }
     public void crearReliquia(){
         
         javax.swing.JLabel reliquia = new javax.swing.JLabel();
@@ -309,17 +313,18 @@ public class GUIJuego extends javax.swing.JFrame {
 
         barraImagenes = new javax.swing.JTextField();
         panelMapa = new javax.swing.JPanel();
+        bg = new javax.swing.JLabel();
         panelBarra = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnSiguienteLvl = new javax.swing.JButton();
-        pbvida = new javax.swing.JProgressBar();
         lblnombre = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblnivel = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnPrueba = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         barraImagenes.setBackground(new java.awt.Color(204, 204, 204));
         barraImagenes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -339,11 +344,11 @@ public class GUIJuego extends javax.swing.JFrame {
         panelMapa.setLayout(panelMapaLayout);
         panelMapaLayout.setHorizontalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
         );
         panelMapaLayout.setVerticalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         panelBarra.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -408,7 +413,7 @@ public class GUIJuego extends javax.swing.JFrame {
             }
         });
 
-        btnPrueba.setBackground(new java.awt.Color(0, 204, 0));
+        btnPrueba.setBackground(new java.awt.Color(51, 153, 0));
         btnPrueba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPrueba.setForeground(new java.awt.Color(255, 255, 255));
         btnPrueba.setText("Iniciar");
@@ -419,52 +424,60 @@ public class GUIJuego extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Registro");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pbvida, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblnombre)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblnivel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(29, 29, 29)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(pbvida, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblnombre)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblnivel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
-                .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblnombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165)
+                .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSiguienteLvl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(31, 31, 31)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -498,63 +511,6 @@ public class GUIJuego extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_barraImagenesActionPerformed
 
-    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
-      //  btnGuardar.setBackground(Color.WHITE);
-      //  btnGuardar.setForeground(Color.BLACK);
-    }//GEN-LAST:event_btnGuardarMouseEntered
-
-    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
-        // TODO add your handling code here:
-      //  btnGuardar.setBackground(new java.awt.Color(255,0,51));
-        //btnGuardar.setForeground(Color.white);
-    }//GEN-LAST:event_btnGuardarMouseExited
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        guardarCoordenadas();
-        System.out.println(partida.aDesplegados.get(0).getNombre());
-        partida.asignarReliquia();
-        try {
-            this.bd.guardar();
-            JOptionPane.showMessageDialog(this, "Partida guardada","SAVE",JOptionPane.DEFAULT_OPTION);
-            this.partida.toStringZombies();
-        } catch (IOException ex) {
-            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnSiguienteLvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteLvlActionPerformed
-        try {
-            // TODO add your handling code here:
-            Partida nueva = new Partida(this.partida.getNivel()+1);
-            this.usuario.setPartida(nueva);
-            GUIJuego juego = new GUIJuego(nueva, this.bd, this.usuario);
-            bd.guardar();
-            lblnivel.repaint();
-            juego.setVisible(true);
-            this.dispose();
-            this.usuario.delPartida(partida);
-            
-            System.out.println("Siguiente partida---------------");
-        } catch (IOException ex) {
-            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSiguienteLvlActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-        guardarCoordenadas();
-        try {
-            this.bd.guardar();
-            this.dispose();
-        } catch (IOException ex) {
-            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnSalirActionPerformed
-
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
         guardarCoordenadas();
         partida.asignarReliquia();
@@ -569,38 +525,103 @@ public class GUIJuego extends javax.swing.JFrame {
         panelBarra.setVisible(false);
 
         this.iniciada=true;
-        
+
         Thread t;
         t = new Thread(new Runnable (){
             @Override
             public void run(){
                 System.out.println("iniciando thread de gui");
                 while(partida.aDesplegados.get(0).getVida()>0){
-                   boolean muertos = true;
-                   for (Zombie z: partida.zDesplegados){
-                     if(z.getVida()>0){
-                         muertos = false; 
-                         break;}
-                   }
-                   if (muertos){
-                       System.out.println("todos estan muertos");
-                       JOptionPane.showMessageDialog(rootPane, "Nivel completado","Eso papi", JOptionPane.YES_NO_OPTION);
-                       Thread.interrupted();
-                       return;
-                   }
-                   else{
-                       //System.out.println("siguen vivos");
-                       continue;
-                   }
+                    boolean muertos = true;
+                    for (Zombie z: partida.zDesplegados){
+                        if(z.getVida()>0){
+                            muertos = false;
+                            break;}
+                    }
+                    if (muertos){
+                        System.out.println("todos estan muertos");
+                        JOptionPane.showMessageDialog(rootPane, "Nivel completado","Eso papi", JOptionPane.YES_NO_OPTION);
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
+                    else{
+                        //System.out.println("siguen vivos");
+                        continue;
+                    }
                 }
                 if (!(partida.aDesplegados.get(0).getVida()>0)){
                     JOptionPane.showMessageDialog(rootPane, "Ya perdió papis, va pa atrás","MAMEI", JOptionPane.OK_OPTION);
+                    Thread.currentThread().interrupt();
                     //dispose();
                 }
             }
         });
         t.start();
     }//GEN-LAST:event_btnPruebaActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        guardarCoordenadas();
+        try {
+            this.bd.guardar();
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnSiguienteLvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteLvlActionPerformed
+        try {
+            // TODO add your handling code here:
+            Partida nueva = new Partida(this.partida.getNivel()+1);
+            this.usuario.setPartida(nueva);
+            GUIJuego juego = new GUIJuego(nueva, this.bd, this.usuario);
+            bd.guardar();
+            lblnivel.repaint();
+            juego.setVisible(true);
+            this.dispose();
+            this.usuario.delPartida(partida);
+
+            System.out.println("Siguiente partida---------------");
+        } catch (IOException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSiguienteLvlActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        guardarCoordenadas();
+        System.out.println(partida.aDesplegados.get(0).getNombre());
+        partida.asignarReliquia();
+        try {
+            this.bd.guardar();
+            JOptionPane.showMessageDialog(this, "Partida guardada","SAVE",JOptionPane.DEFAULT_OPTION);
+            this.partida.toStringZombies();
+        } catch (IOException ex) {
+            Logger.getLogger(GUIJuego.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        // TODO add your handling code here:
+        //  btnGuardar.setBackground(new java.awt.Color(255,0,51));
+        //btnGuardar.setForeground(Color.white);
+    }//GEN-LAST:event_btnGuardarMouseExited
+
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        //  btnGuardar.setBackground(Color.WHITE);
+        //  btnGuardar.setForeground(Color.BLACK);
+    }//GEN-LAST:event_btnGuardarMouseEntered
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Registro reg = new Registro(partida);
+        reg.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -640,10 +661,12 @@ public class GUIJuego extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField barraImagenes;
+    private javax.swing.JLabel bg;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnPrueba;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSiguienteLvl;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -651,6 +674,5 @@ public class GUIJuego extends javax.swing.JFrame {
     private javax.swing.JLabel lblnombre;
     private javax.swing.JPanel panelBarra;
     private javax.swing.JPanel panelMapa;
-    private javax.swing.JProgressBar pbvida;
     // End of variables declaration//GEN-END:variables
 }

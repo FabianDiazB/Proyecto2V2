@@ -55,8 +55,8 @@ public abstract class Zombie extends Thread implements Serializable{
             this.caminando=false;
             sleep(1000);
             System.out.println(this.getNombre()+" atacando a " +arma.getNombre()+arma.getVida());
-            //this.addRegistroAtq(this, arma);
-            //arma.addRegistroDmg(this, arma);
+            this.addRegistroAtq(this, arma);
+            arma.addRegistroDmg(this, arma);
 
         }
 //        if(this.vida<=0){
